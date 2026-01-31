@@ -65,3 +65,11 @@ implementations to keep dependencies light.
 
 For integration tests, you can optionally generate missing reference draws by
 setting `MCMC_REF_GENERATE=1` and (optionally) `MCMC_REF_GENERATE_MODEL=...`.
+
+## Origin Story:
+
+Brainstorm:
+    -https://gisthost.github.io/?a47c363027aba4615cd3247ed5f88793
+
+Implemntation: 
+    -https://gistpreview.github.io/?018116c7a98a7d75e363e77689ec7b26
