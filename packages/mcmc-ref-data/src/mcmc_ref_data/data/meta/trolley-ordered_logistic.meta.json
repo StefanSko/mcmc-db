@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta_action": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9894.981507213652,
+      "rhat": 0.9999941864844091
+    },
+    "beta_contact": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001042301350667
+    },
+    "beta_intention": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003160667550322
+    },
+    "cutpoints[1]": {
+      "ess_bulk": 9679.920319389537,
+      "ess_tail": 9843.436519160274,
+      "rhat": 1.00024648547911
+    },
+    "cutpoints[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9498.354410615017,
+      "rhat": 0.9999999359473801
+    },
+    "cutpoints[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9340.688962419186,
+      "rhat": 1.00001901435914
+    },
+    "cutpoints[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998478420724808
+    },
+    "cutpoints[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004556367631252
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "trolley-ordered_logistic",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta_action",
+    "beta_contact",
+    "beta_intention",
+    "cutpoints[1]",
+    "cutpoints[2]",
+    "cutpoints[3]",
+    "cutpoints[4]",
+    "cutpoints[5]"
+  ],
+  "source": "converted"
+}

@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "early_rate": {
+      "ess_bulk": 9298.474166005417,
+      "ess_tail": 9887.284963166776,
+      "rhat": 1.0001104378451078
+    },
+    "late_rate": {
+      "ess_bulk": 9101.328313026925,
+      "ess_tail": 9440.910128276977,
+      "rhat": 0.9998954036692733
+    },
+    "switchpoint": {
+      "ess_bulk": 7637.915522501278,
+      "ess_tail": 8652.551056427705,
+      "rhat": 1.0004088463254437
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "coal_mining-changepoint",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "early_rate",
+    "late_rate",
+    "switchpoint"
+  ],
+  "source": "converted"
+}

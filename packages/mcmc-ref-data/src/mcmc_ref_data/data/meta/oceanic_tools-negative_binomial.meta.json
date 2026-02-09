@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9444.74705269411,
+      "rhat": 1.000149024884806
+    },
+    "beta_contact": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9501.835024403596,
+      "rhat": 0.9999475707645422
+    },
+    "beta_pop": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9930.271920333631,
+      "rhat": 1.0001268212600571
+    },
+    "phi": {
+      "ess_bulk": 9871.63436223814,
+      "ess_tail": 9800.502900853173,
+      "rhat": 1.0000460740018038
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "oceanic_tools-negative_binomial",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "beta_contact",
+    "beta_pop",
+    "phi"
+  ],
+  "source": "converted"
+}
