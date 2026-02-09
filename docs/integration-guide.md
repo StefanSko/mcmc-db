@@ -102,6 +102,29 @@ Generate local corpus from posteriordb draw archives:
 uv run --extra dev python scripts/build_references.py
 ```
 
+This builds the default/posteriordb corpus.
+
+## Add Informed-Prior References (Maintainers)
+
+Import informed-prior references (for example the `jaxstanv3` informed set):
+
+```bash
+uv run --extra dev python scripts/import_informed_references.py \
+  --source-dir /tmp/jaxstanv3/tests/posteriordb/informed_references/draws \
+  --output-root ~/.mcmc-ref
+```
+
+Imported models are tagged in metadata with:
+- `reference_variant: "informed_prior"`
+- `informed_reference_info` (when the source `.info.json` exists)
+
+Typical informed models currently available:
+- `blr_informed`
+- `kidscore_momiq_informed`
+- `logearn_height_informed`
+- `mesquite_logvolume_informed`
+- `radon_pooled_informed`
+
 Useful options:
 
 ```bash

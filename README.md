@@ -7,6 +7,9 @@ see:
 
 - `docs/integration-guide.md`
 
+Current packaged corpus includes both default posteriordb references and
+informed-prior variants (for models where informed references are available).
+
 Design notes:
 
 - `docs/plans/2026-01-31-mcmc-ref-design.md`

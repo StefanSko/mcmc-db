@@ -17,6 +17,7 @@ data = ["mcmc-ref-data==0.0.0"]
 [project.scripts]
 mcmc-ref = "mcmc_ref.cli:main"
 mcmc-ref-build-references = "mcmc_ref.build_references:main"
+mcmc-ref-import-informed = "mcmc_ref.informed_references:main"
 
 [tool.uv.sources]
 mcmc-ref-data = { path = "packages/mcmc-ref-data" }
