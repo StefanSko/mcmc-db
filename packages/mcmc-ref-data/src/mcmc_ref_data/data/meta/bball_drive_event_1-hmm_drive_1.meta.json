@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "lambda[1]": {
+      "ess_bulk": 9317.003053562965,
+      "ess_tail": 9855.148992892096,
+      "rhat": 0.9997202326445812
+    },
+    "lambda[2]": {
+      "ess_bulk": 9863.562887619195,
+      "ess_tail": 8577.119140515248,
+      "rhat": 0.9997092190290553
+    },
+    "phi[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004431200271644
+    },
+    "phi[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003075144360845
+    },
+    "theta1[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9595.867082607483,
+      "rhat": 1.0000737549957932
+    },
+    "theta1[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9596.736613303756,
+      "rhat": 1.0000737549957932
+    },
+    "theta2[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9742.909322533938,
+      "rhat": 0.999861890145286
+    },
+    "theta2[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9742.226479233294,
+      "rhat": 0.999861890145286
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "bball_drive_event_1-hmm_drive_1",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "lambda[1]",
+    "lambda[2]",
+    "phi[1]",
+    "phi[2]",
+    "theta1[1]",
+    "theta1[2]",
+    "theta2[1]",
+    "theta2[2]"
+  ],
+  "source": "converted"
+}

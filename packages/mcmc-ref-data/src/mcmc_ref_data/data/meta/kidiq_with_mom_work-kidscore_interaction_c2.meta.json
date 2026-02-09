@@ -1,0 +1,47 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000154750915916
+    },
+    "beta[2]": {
+      "ess_bulk": 9905.529302172054,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001533942819867
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002861576484583
+    },
+    "beta[4]": {
+      "ess_bulk": 9908.261598368212,
+      "ess_tail": 9831.802847364423,
+      "rhat": 1.0004079811943962
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000274465847946
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "kidiq_with_mom_work-kidscore_interaction_c2",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "sigma"
+  ],
+  "source": "converted"
+}

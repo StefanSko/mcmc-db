@@ -1,0 +1,77 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9530.286985360022,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003121882217016
+    },
+    "beta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002587953061701
+    },
+    "beta[3]": {
+      "ess_bulk": 9884.531223204598,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998774746034592
+    },
+    "beta[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9964.1430891659,
+      "rhat": 0.9998850836503624
+    },
+    "beta[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9583.283712503266,
+      "rhat": 1.000259392267388
+    },
+    "beta[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0006271392492059
+    },
+    "beta[7]": {
+      "ess_bulk": 9807.790707192948,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004581966810588
+    },
+    "beta[8]": {
+      "ess_bulk": 9910.39829105069,
+      "ess_tail": 9685.03942134974,
+      "rhat": 0.9996479442634755
+    },
+    "beta[9]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9996947521128402
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9940.349760723608,
+      "rhat": 1.0003215589969474
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "nes1972-nes",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "beta[6]",
+    "beta[7]",
+    "beta[8]",
+    "beta[9]",
+    "sigma"
+  ],
+  "source": "converted"
+}

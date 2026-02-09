@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import importlib.resources
 from pathlib import Path
 
 import pyarrow as pa
 import pyarrow.parquet as pq
 
+from mcmc_ref import store as store_mod
 from mcmc_ref.store import DataStore
 
 
@@ -31,7 +33,7 @@ def test_datastore_list_models(tmp_path: Path) -> None:
     store = DataStore(local_root=tmp_path)
     models = store.list_models()
 
-    assert models == ["example"]
+    assert "example" in models
 
 
 def test_datastore_open_draws_params(tmp_path: Path) -> None:
@@ -49,3 +51,48 @@ def test_datastore_open_draws_params(tmp_path: Path) -> None:
 
     assert table.column_names == ["chain", "draw", "mu"]
     assert table.num_rows == 2
+
+
+def test_default_packaged_root_falls_back_to_data_package(tmp_path: Path, monkeypatch) -> None:
+    core_pkg = tmp_path / "core_pkg"
+    data_pkg = tmp_path / "data_pkg"
+    (core_pkg / "data").mkdir(parents=True)
+    (data_pkg / "data" / "draws").mkdir(parents=True)
+    (data_pkg / "data" / "meta").mkdir(parents=True)
+
+    def fake_files(package_name: str):
+        mapping = {
+            "mcmc_ref": core_pkg,
+            "mcmc_ref_data": data_pkg,
+        }
+        return mapping[package_name]
+
+    monkeypatch.setattr(importlib.resources, "files", fake_files)
+
+    root = store_mod._default_packaged_root()
+
+    assert root == data_pkg / "data"
+
+
+def test_default_packaged_root_prefers_core_package_when_present(
+    tmp_path: Path, monkeypatch
+) -> None:
+    core_pkg = tmp_path / "core_pkg"
+    data_pkg = tmp_path / "data_pkg"
+    (core_pkg / "data" / "draws").mkdir(parents=True)
+    (core_pkg / "data" / "meta").mkdir(parents=True)
+    (data_pkg / "data" / "draws").mkdir(parents=True)
+    (data_pkg / "data" / "meta").mkdir(parents=True)
+
+    def fake_files(package_name: str):
+        mapping = {
+            "mcmc_ref": core_pkg,
+            "mcmc_ref_data": data_pkg,
+        }
+        return mapping[package_name]
+
+    monkeypatch.setattr(importlib.resources, "files", fake_files)
+
+    root = store_mod._default_packaged_root()
+
+    assert root == core_pkg / "data"

@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9972.917139957,
+      "rhat": 1.000167002727894
+    },
+    "beta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9872.188422112058,
+      "rhat": 1.0000212267306894
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9447.296452417864,
+      "rhat": 1.000048568682463
+    },
+    "beta[4]": {
+      "ess_bulk": 9470.273629802514,
+      "ess_tail": 10000.0,
+      "rhat": 1.000238064541037
+    },
+    "beta[5]": {
+      "ess_bulk": 9703.989136751143,
+      "ess_tail": 9647.880838077657,
+      "rhat": 0.9998869619729177
+    },
+    "sigma": {
+      "ess_bulk": 9820.013828467298,
+      "ess_tail": 10000.0,
+      "rhat": 1.000068244871297
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "sblrc-blr",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "sigma"
+  ],
+  "source": "converted"
+}

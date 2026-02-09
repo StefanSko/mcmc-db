@@ -1,0 +1,77 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "mu": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9916.717898392708,
+      "rhat": 0.9997610003353462
+    },
+    "tau": {
+      "ess_bulk": 9969.208636814981,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998451326204746
+    },
+    "theta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9700.77261793738,
+      "rhat": 0.9997886574905762
+    },
+    "theta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9953.266894569808,
+      "rhat": 0.9998407511004216
+    },
+    "theta[3]": {
+      "ess_bulk": 9461.166557435692,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001365116097765
+    },
+    "theta[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.00026692624752
+    },
+    "theta[5]": {
+      "ess_bulk": 9900.980530174382,
+      "ess_tail": 9996.387133626999,
+      "rhat": 1.000482272860001
+    },
+    "theta[6]": {
+      "ess_bulk": 9776.57930885933,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000473457458439
+    },
+    "theta[7]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999305844550335
+    },
+    "theta[8]": {
+      "ess_bulk": 9596.426686126264,
+      "ess_tail": 9912.530314769696,
+      "rhat": 0.999968599062987
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "eight_schools-eight_schools_noncentered",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "mu",
+    "tau",
+    "theta[1]",
+    "theta[2]",
+    "theta[3]",
+    "theta[4]",
+    "theta[5]",
+    "theta[6]",
+    "theta[7]",
+    "theta[8]"
+  ],
+  "source": "converted"
+}

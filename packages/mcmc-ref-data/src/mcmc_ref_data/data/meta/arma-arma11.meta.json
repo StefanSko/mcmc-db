@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "mu": {
+      "ess_bulk": 9678.848475830038,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001114709812517
+    },
+    "phi": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9688.912034763574,
+      "rhat": 1.0005030909328803
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9519.01245610125,
+      "rhat": 1.000305716846798
+    },
+    "theta": {
+      "ess_bulk": 9699.590095611973,
+      "ess_tail": 9702.728150438992,
+      "rhat": 1.000443668073845
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "arma-arma11",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "mu",
+    "phi",
+    "sigma",
+    "theta"
+  ],
+  "source": "converted"
+}

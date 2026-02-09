@@ -1,0 +1,59 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9912.36849669714,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999366909526856
+    },
+    "beta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9712.040546745242,
+      "rhat": 0.9997826403995127
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998044743299245
+    },
+    "beta[4]": {
+      "ess_bulk": 9875.121473726198,
+      "ess_tail": 10000.0,
+      "rhat": 1.000860749354376
+    },
+    "beta[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9929.654708251803,
+      "rhat": 1.0005282701691292
+    },
+    "beta[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999528595927585
+    },
+    "sigma": {
+      "ess_bulk": 9928.065706090661,
+      "ess_tail": 10000.0,
+      "rhat": 0.9994688615911426
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "mesquite-logmesquite_logvash",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "beta[6]",
+    "sigma"
+  ],
+  "source": "converted"
+}

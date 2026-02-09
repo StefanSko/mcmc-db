@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "mu[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003753072003803
+    },
+    "mu[2]": {
+      "ess_bulk": 9743.314892935961,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998993003362451
+    },
+    "theta1[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003398734128768
+    },
+    "theta1[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003398734128768
+    },
+    "theta2[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001944474168525
+    },
+    "theta2[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001963163077021
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "hmm_example-hmm_example",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "mu[1]",
+    "mu[2]",
+    "theta1[1]",
+    "theta1[2]",
+    "theta2[1]",
+    "theta2[2]"
+  ],
+  "source": "converted"
+}
