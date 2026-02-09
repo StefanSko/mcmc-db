@@ -10,8 +10,25 @@ from collections.abc import Sequence
 from statistics import NormalDist, median
 
 
-def split_rhat(chains: Sequence[Sequence[float]]) -> float:
-    """Rank-normalized split R-hat with folded variant (returns max of both)."""
+def split_rhat(
+    chains: Sequence[Sequence[float]],
+    *,
+    min_chains: int = 4,
+) -> float:
+    """Rank-normalized split R-hat with folded variant (returns max of both).
+
+    By default diagnostics are only valid for at least 4 independent chains.
+    Set ``min_chains=1`` to bypass this guard and return
+    ``nan`` for single-chain input.
+    """
+    _validate_min_chains(min_chains)
+    if len(chains) < min_chains:
+        raise ValueError(
+            f"R-hat diagnostics require at least {min_chains} chains; got {len(chains)} chain(s)"
+        )
+    if len(chains) < 2:
+        return float("nan")
+
     z = _rank_normalize(chains)
     split = _split_chains(z)
     rhat_bulk = _rhat(split)
@@ -23,12 +40,34 @@ def split_rhat(chains: Sequence[Sequence[float]]) -> float:
     return max(rhat_bulk, rhat_tail)
 
 
-def ess_bulk(chains: Sequence[Sequence[float]]) -> float:
+def ess_bulk(
+    chains: Sequence[Sequence[float]],
+    *,
+    min_chains: int = 4,
+) -> float:
+    _validate_min_chains(min_chains)
+    if len(chains) < min_chains:
+        raise ValueError(
+            f"ESS diagnostics require at least {min_chains} chains; got {len(chains)} chain(s)"
+        )
+    if len(chains) < 2:
+        return float("nan")
     z = _rank_normalize(chains)
     return _ess(z)
 
 
-def ess_tail(chains: Sequence[Sequence[float]]) -> float:
+def ess_tail(
+    chains: Sequence[Sequence[float]],
+    *,
+    min_chains: int = 4,
+) -> float:
+    _validate_min_chains(min_chains)
+    if len(chains) < min_chains:
+        raise ValueError(
+            f"ESS diagnostics require at least {min_chains} chains; got {len(chains)} chain(s)"
+        )
+    if len(chains) < 2:
+        return float("nan")
     folded = _fold_chains(chains)
     z_folded = _rank_normalize(folded)
     return _ess(z_folded)
@@ -44,6 +83,11 @@ def _split_chains(chains: Sequence[Sequence[float]]) -> list[list[float]]:
         out.append(list(chain[:half]))
         out.append(list(chain[half : half * 2]))
     return out
+
+
+def _validate_min_chains(min_chains: int) -> None:
+    if min_chains < 1:
+        raise ValueError(f"min_chains must be >= 1; got {min_chains}")
 
 
 def _fold_chains(chains: Sequence[Sequence[float]]) -> list[list[float]]:

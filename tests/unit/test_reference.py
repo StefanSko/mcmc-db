@@ -13,9 +13,9 @@ from mcmc_ref.store import DataStore
 def _write_parquet(path: Path) -> None:
     table = pa.table(
         {
-            "chain": pa.array([0, 0, 1, 1], type=pa.int32()),
-            "draw": pa.array([0, 1, 0, 1], type=pa.int32()),
-            "mu": pa.array([1.0, 2.0, 1.5, 2.5], type=pa.float64()),
+            "chain": pa.array([0, 0, 1, 1, 2, 2, 3, 3], type=pa.int32()),
+            "draw": pa.array([0, 1, 0, 1, 0, 1, 0, 1], type=pa.int32()),
+            "mu": pa.array([1.0, 2.0, 1.5, 2.5, 1.0, 2.0, 1.5, 2.5], type=pa.float64()),
         }
     )
     pq.write_table(table, path)

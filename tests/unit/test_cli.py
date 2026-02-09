@@ -12,9 +12,9 @@ from mcmc_ref.cli import main
 def _write_parquet(path: Path) -> None:
     table = pa.table(
         {
-            "chain": pa.array([0, 0, 1, 1], type=pa.int32()),
-            "draw": pa.array([0, 1, 0, 1], type=pa.int32()),
-            "mu": pa.array([1.0, 2.0, 1.5, 2.5], type=pa.float64()),
+            "chain": pa.array([0, 0, 1, 1, 2, 2, 3, 3], type=pa.int32()),
+            "draw": pa.array([0, 1, 0, 1, 0, 1, 0, 1], type=pa.int32()),
+            "mu": pa.array([1.0, 2.0, 1.5, 2.5, 1.0, 2.0, 1.5, 2.5], type=pa.float64()),
         }
     )
     pq.write_table(table, path)
@@ -75,13 +75,7 @@ def test_cli_compare_passes(tmp_path: Path, monkeypatch) -> None:
     (meta_dir / "example.meta.json").write_text("{}")
 
     actual_csv = tmp_path / "actual.csv"
-    actual_csv.write_text(
-        "chain,draw,mu\n"
-        "0,0,1.0\n"
-        "0,1,2.0\n"
-        "1,0,1.5\n"
-        "1,1,2.5\n"
-    )
+    actual_csv.write_text("chain,draw,mu\n0,0,1.0\n0,1,2.0\n1,0,1.5\n1,1,2.5\n")
 
     monkeypatch.setenv("MCMC_REF_LOCAL_ROOT", str(tmp_path))
 
