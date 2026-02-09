@@ -58,6 +58,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+data = [
+    { name = "mcmc-ref-data" },
+]
 dev = [
     { name = "pytest" },
     { name = "ruff" },
@@ -71,13 +74,19 @@ extras = [
 [package.metadata]
 requires-dist = [
     { name = "click", specifier = ">=8.1" },
+    { name = "mcmc-ref-data", marker = "extra == 'data'", directory = "packages/mcmc-ref-data" },
     { name = "numpy", marker = "extra == 'extras'", specifier = ">=1.24" },
     { name = "pyarrow", specifier = ">=14" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.2" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.5.0" },
     { name = "ty", marker = "extra == 'dev'", specifier = ">=0.0.1" },
 ]
-provides-extras = ["extras", "dev"]
+provides-extras = ["extras", "dev", "data"]
+
+[[package]]
+name = "mcmc-ref-data"
+version = "0.0.0"
+source = { directory = "packages/mcmc-ref-data" }
 
 [[package]]
 name = "numpy"

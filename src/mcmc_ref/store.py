@@ -105,8 +105,16 @@ def _default_local_root() -> Path:
 def _default_packaged_root() -> Path | None:
     try:
         from importlib import resources
-
-        package = resources.files("mcmc_ref").joinpath("data")
-        return Path(str(package))
     except Exception:
         return None
+
+    for package_name in ("mcmc_ref", "mcmc_ref_data"):
+        try:
+            package_data = Path(str(resources.files(package_name).joinpath("data")))
+        except Exception:
+            continue
+        draws = package_data / "draws"
+        meta = package_data / "meta"
+        if draws.exists() or meta.exists():
+            return package_data
+    return None

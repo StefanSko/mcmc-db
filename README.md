@@ -2,6 +2,19 @@
 
 Reference posterior validation tool for Bayesian inference libraries.
 
+## Installation (uv)
+
+```bash
+# core library only
+uv add mcmc-ref
+
+# core library + packaged reference corpus
+uv add "mcmc-ref[data]"
+```
+
+In this repository, `mcmc-ref[data]` resolves `mcmc-ref-data` from
+`packages/mcmc-ref-data` via `tool.uv.sources`.
+
 ## Development
 
 - Use `uv` for envs and tool execution.
@@ -99,11 +112,29 @@ uv run --extra dev python scripts/build_references.py \
 If you install `mcmc-ref` as a package, the equivalent command is
 `mcmc-ref-build-references`.
 
+## Publish Packaged Data (uv)
+
+After generating/refreshing `~/.mcmc-ref`, sync it into the data package:
+
+```bash
+uv run --extra dev python scripts/sync_data_package.py
+```
+
+Then build/publish the data package:
+
+```bash
+cd packages/mcmc-ref-data
+uv build
+uv publish
+```
+
+Publish `mcmc-ref` with a matching version so `mcmc-ref[data]` stays aligned.
+
 ## Validate From Another Library
 
 Point your tests at the reference corpus and compare your sampler output.
 
-1. Build or download a corpus containing `draws/*.draws.parquet` and `meta/*.meta.json`.
+1. Install with packaged corpus (`uv add "mcmc-ref[data]"`) or build/download a corpus containing `draws/*.draws.parquet` and `meta/*.meta.json`.
 2. Set `MCMC_REF_LOCAL_ROOT` to that corpus root in your test environment.
 3. Run comparisons against one or more models.
 
