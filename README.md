@@ -8,7 +8,9 @@ see:
 - `docs/integration-guide.md`
 
 Current packaged corpus includes both default posteriordb references and
-informed-prior variants (for models where informed references are available).
+informed-prior variants (for models where informed references are available),
+and can include `.stan` model files next to draws.
+The integration guide documents posteriordb-free local generation with CmdStan.
 
 Design notes:
 

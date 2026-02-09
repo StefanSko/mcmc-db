@@ -104,6 +104,82 @@ uv run --extra dev python scripts/build_references.py
 
 This builds the default/posteriordb corpus.
 
+## Full Provenance Generation With CmdStan
+
+If you want provenance generated in this repository (instead of importing zips
+from another source), generate raw references directly from posteriordb with
+CmdStan.
+
+Install generation dependencies:
+
+```bash
+uv add --dev "mcmc-ref[generate,bootstrap]"
+```
+
+Install CmdStan (one-time):
+
+```bash
+uv run python -c "import cmdstanpy; cmdstanpy.install_cmdstan()"
+```
+
+Generate posteriors from posteriordb:
+
+```bash
+uv run --extra dev --extra generate python scripts/generate_posteriordb_references.py \
+  --posteriordb-path ~/.posteriordb/posterior_database \
+  --output-dir generated_references/posteriordb \
+  --posterior eight_schools-eight_schools_noncentered
+```
+
+Outputs include:
+- `generated_references/posteriordb/draws/{posterior}.json.zip`
+- `generated_references/posteriordb/provenance/{posterior}.provenance.json`
+- `generated_references/posteriordb/stan_models/{posterior}.stan`
+- `generated_references/posteriordb/generation_manifest.json`
+
+Then convert/import these references into `~/.mcmc-ref` via:
+- `scripts/build_references.py` (for standard names)
+- `scripts/import_informed_references.py` (for `_informed` variants)
+
+## Posteriordb-Free Local Generation (Recommended)
+
+For day-to-day generation, use local model+data files only:
+- `data/stan_models/{model}.stan`
+- `data/stan_data/{model}.data.json`
+
+One-time bootstrap from posteriordb:
+
+```bash
+uv add --dev "mcmc-ref[bootstrap]"
+uv run --extra dev --extra bootstrap python scripts/sync_stan_models.py \
+  --draws-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/draws \
+  --target-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_models \
+  --posteriordb-path ~/.posteriordb/posterior_database \
+  --informed-stan-dir /tmp/jaxstanv3/tests/posteriordb/informed_references/stan_models
+
+uv run --extra dev --extra bootstrap python scripts/sync_stan_data.py \
+  --draws-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/draws \
+  --target-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_data \
+  --posteriordb-path ~/.posteriordb/posterior_database
+```
+
+Generate references from local files (no posteriordb required):
+
+```bash
+uv run --extra dev --extra generate python scripts/generate_local_references.py \
+  --models-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_models \
+  --data-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_data \
+  --output-dir generated_references/local \
+  --model eight_schools-eight_schools_noncentered
+```
+
+Outputs:
+- `generated_references/local/draws/{model}.json.zip`
+- `generated_references/local/provenance/{model}.provenance.json`
+- `generated_references/local/stan_models/{model}.stan`
+- `generated_references/local/stan_data/{model}.data.json`
+- `generated_references/local/generation_manifest.json`
+
 ## Add Informed-Prior References (Maintainers)
 
 Import informed-prior references (for example the `jaxstanv3` informed set):
@@ -159,6 +235,30 @@ uv publish
 ```
 
 Then publish `mcmc-ref` with a matching version so `mcmc-ref[data]` stays aligned.
+
+## Add Stan Models Next To Packaged Draws
+
+To bundle the actual Stan model code with packaged references:
+
+```bash
+uv run --extra dev --extra generate python scripts/sync_stan_models.py \
+  --draws-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/draws \
+  --target-dir packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_models \
+  --posteriordb-path ~/.posteriordb/posterior_database \
+  --informed-stan-dir /tmp/jaxstanv3/tests/posteriordb/informed_references/stan_models
+```
+
+This writes:
+- standard model `.stan` files from posteriordb
+- informed `_informed.stan` files from the informed source directory
+
+## Do You Still Need posteriordb?
+
+- For using packaged references in framework tests: **no**.
+- For generating new references from local model+data files: **no**.
+- For bootstrapping new model/data from posteriordb by posterior name: **yes**.
+- If you already have local Stan code + data and only need conversion/comparison:
+  you can skip posteriordb and use `convert` directly.
 
 ## Quality Notes
 
