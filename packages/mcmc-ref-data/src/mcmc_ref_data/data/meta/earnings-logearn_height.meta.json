@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9878.174394784995,
+      "rhat": 0.9998425231814858
+    },
+    "beta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9851.729075753627,
+      "rhat": 0.9998366078439733
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9841.404081587229,
+      "rhat": 1.000260397714206
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "earnings-logearn_height",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "sigma"
+  ],
+  "source": "converted"
+}

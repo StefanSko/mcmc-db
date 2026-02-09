@@ -1,0 +1,47 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9578.048343423123,
+      "ess_tail": 9941.68318177784,
+      "rhat": 1.0000156887195017
+    },
+    "beta[2]": {
+      "ess_bulk": 8933.193917588374,
+      "ess_tail": 9832.76930051309,
+      "rhat": 1.0001312613455302
+    },
+    "beta[3]": {
+      "ess_bulk": 9546.850129179847,
+      "ess_tail": 9999.284603890335,
+      "rhat": 1.0001276681738287
+    },
+    "beta[4]": {
+      "ess_bulk": 8939.307405436877,
+      "ess_tail": 9917.032054084493,
+      "rhat": 1.0001817928175458
+    },
+    "sigma": {
+      "ess_bulk": 9799.772817318039,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999159146687322
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "kidiq-kidscore_interaction",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "sigma"
+  ],
+  "source": "converted"
+}

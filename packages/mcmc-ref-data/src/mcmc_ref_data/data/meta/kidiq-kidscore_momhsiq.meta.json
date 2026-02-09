@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998692039734683
+    },
+    "beta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001158306990745
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9953.790699422489,
+      "rhat": 0.9998366282987251
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0005330320979153
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "kidiq-kidscore_momhsiq",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "sigma"
+  ],
+  "source": "converted"
+}

@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000646943257414
+    },
+    "beta[2]": {
+      "ess_bulk": 9854.732164116227,
+      "ess_tail": 9755.758614340742,
+      "rhat": 1.0000068525763808
+    },
+    "beta[3]": {
+      "ess_bulk": 9874.389012573689,
+      "ess_tail": 9835.520124093593,
+      "rhat": 0.9999646857576604
+    },
+    "beta[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9819.285572755238,
+      "rhat": 0.9995350203401936
+    },
+    "beta[5]": {
+      "ess_bulk": 9960.091629375427,
+      "ess_tail": 9814.664397424094,
+      "rhat": 0.9997926350238246
+    },
+    "beta[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9965.194608068978,
+      "rhat": 1.000208455668486
+    },
+    "beta[7]": {
+      "ess_bulk": 9741.767374092859,
+      "ess_tail": 9350.579117014266,
+      "rhat": 1.0001866454933483
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9950.379599695018,
+      "rhat": 1.0002646045989823
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "mesquite-logmesquite_logvas",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "beta[6]",
+    "beta[7]",
+    "sigma"
+  ],
+  "source": "converted"
+}

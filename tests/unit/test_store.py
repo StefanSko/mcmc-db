@@ -33,7 +33,7 @@ def test_datastore_list_models(tmp_path: Path) -> None:
     store = DataStore(local_root=tmp_path)
     models = store.list_models()
 
-    assert models == ["example"]
+    assert "example" in models
 
 
 def test_datastore_open_draws_params(tmp_path: Path) -> None:

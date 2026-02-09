@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001943448373936
+    },
+    "rho": {
+      "ess_bulk": 9738.358040048372,
+      "ess_tail": 9399.784105261127,
+      "rhat": 1.0005123504799458
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9616.172381481389,
+      "rhat": 0.9998614633654386
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "gp_pois_regr-gp_regr",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "rho",
+    "sigma"
+  ],
+  "source": "converted"
+}

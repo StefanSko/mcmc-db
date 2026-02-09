@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "sigma[1]": {
+      "ess_bulk": 9798.995064768667,
+      "ess_tail": 10000.0,
+      "rhat": 1.000037105512129
+    },
+    "sigma[2]": {
+      "ess_bulk": 9932.246273396719,
+      "ess_tail": 9880.31355694292,
+      "rhat": 0.9998255882977176
+    },
+    "theta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9909.996054711572,
+      "rhat": 1.0009387340333642
+    },
+    "theta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000779802976853
+    },
+    "theta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.001000055783303
+    },
+    "theta[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9971.007890407533,
+      "rhat": 1.0011056516168926
+    },
+    "z_init[1]": {
+      "ess_bulk": 9914.883979203336,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004526886615779
+    },
+    "z_init[2]": {
+      "ess_bulk": 9863.104436505728,
+      "ess_tail": 10000.0,
+      "rhat": 1.000852804678129
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "hudson_lynx_hare-lotka_volterra",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "sigma[1]",
+    "sigma[2]",
+    "theta[1]",
+    "theta[2]",
+    "theta[3]",
+    "theta[4]",
+    "z_init[1]",
+    "z_init[2]"
+  ],
+  "source": "converted"
+}
