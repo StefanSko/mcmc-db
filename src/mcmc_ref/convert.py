@@ -40,7 +40,7 @@ def convert_file(
     params = [c for c in table.column_names if c not in {"chain", "draw"}]
     n_chains, n_draws = _count_chains_draws(table)
 
-    diag = _compute_diagnostics(table, params)
+    diag = _compute_diagnostics(table, params, min_chains=1 if force else 4)
     checks = _checks(n_chains, n_draws, diag)
 
     if not force:
@@ -130,13 +130,18 @@ def _count_chains_draws(table: pa.Table) -> tuple[int, int]:
     return n_chains, n_draws
 
 
-def _compute_diagnostics(table: pa.Table, params: Iterable[str]) -> dict[str, dict[str, float]]:
+def _compute_diagnostics(
+    table: pa.Table,
+    params: Iterable[str],
+    *,
+    min_chains: int = 4,
+) -> dict[str, dict[str, float]]:
     diag: dict[str, dict[str, float]] = {}
     for param in params:
         chains = _chains_from_table(table, param)
-        rhat = diagnostics.split_rhat(chains)
-        ess_b = diagnostics.ess_bulk(chains)
-        ess_t = diagnostics.ess_tail(chains)
+        rhat = diagnostics.split_rhat(chains, min_chains=min_chains)
+        ess_b = diagnostics.ess_bulk(chains, min_chains=min_chains)
+        ess_t = diagnostics.ess_tail(chains, min_chains=min_chains)
         diag[param] = {"rhat": rhat, "ess_bulk": ess_b, "ess_tail": ess_t}
     return diag
 
