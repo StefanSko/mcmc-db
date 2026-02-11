@@ -90,7 +90,8 @@ class DataStore:
             return None
         draws = root / "draws"
         meta = root / "meta"
-        if not draws.exists() and not meta.exists():
+        pairs = root / "pairs"
+        if not draws.exists() and not meta.exists() and not pairs.exists():
             return None
         return StorePaths(root=root, draws=draws, meta=meta)
 

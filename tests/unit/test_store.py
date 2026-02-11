@@ -30,7 +30,7 @@ def test_datastore_list_models(tmp_path: Path) -> None:
     _write_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
-    store = DataStore(local_root=tmp_path)
+    store = DataStore(local_root=tmp_path, packaged_root=tmp_path)
     models = store.list_models()
 
     assert "example" in models
@@ -45,7 +45,7 @@ def test_datastore_open_draws_params(tmp_path: Path) -> None:
     _write_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
-    store = DataStore(local_root=tmp_path)
+    store = DataStore(local_root=tmp_path, packaged_root=tmp_path)
     reader = store.open_draws("example", params=["mu"], chains=[1])
     table = reader.read_all()
 
