@@ -1,0 +1,13 @@
+{
+  "parameters": [
+    {"name": "v", "shape": [], "constraint": "real"},
+    {"name": "x", "shape": [9], "constraint": "real"}
+  ],
+  "data": [
+    {"name": "N", "type": "int"}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "v", "mean": 0, "sd": 3},
+    {"type": "normal", "variate": "x", "mean": 0, "sd": "exp(v/2)"}
+  ]
+}

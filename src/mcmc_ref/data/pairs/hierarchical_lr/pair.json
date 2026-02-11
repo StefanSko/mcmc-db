@@ -1,0 +1,9 @@
+{
+  "name": "hierarchical_lr",
+  "description": "Hierarchical linear regression with sparse groups",
+  "bad_variant": "centered",
+  "good_variant": "noncentered",
+  "reference_model": "hierarchical_lr-noncentered",
+  "expected_pathologies": ["divergences", "high_rhat", "low_ess"],
+  "difficulty": "medium"
+}

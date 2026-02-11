@@ -11,6 +11,7 @@ import pyarrow.csv as pacsv
 import pyarrow.parquet as pq
 
 from . import convert as convert_mod
+from . import pairs as pairs_mod
 from . import reference
 from .store import DataStore
 
@@ -185,6 +186,44 @@ def convert_cmd(input_path: Path, name: str, force: bool) -> None:
         input_path, name=name, out_draws_dir=draws_dir, out_meta_dir=meta_dir, force=force
     )
     click.echo(f"converted {name} -> {draws_dir}")
+
+
+@main.command("pairs")
+@click.option(
+    "--format",
+    "format_",
+    type=click.Choice(["table", "json"], case_sensitive=False),
+    default="table",
+)
+def pairs_cmd(format_: str) -> None:
+    """List all reparametrization pairs."""
+    names = pairs_mod.list_pairs()
+    if format_ == "json":
+        click.echo(json.dumps(names, indent=2))
+        return
+    for name in names:
+        click.echo(name)
+
+
+@main.command("pair")
+@click.argument("name")
+def pair_cmd(name: str) -> None:
+    """Show info about a reparametrization pair."""
+    try:
+        p = pairs_mod.pair(name)
+    except FileNotFoundError as exc:
+        click.echo(f"pair not found: {name}", err=True)
+        raise SystemExit(1) from exc
+    info = {
+        "name": p.name,
+        "description": p.description,
+        "bad_variant": p.bad_variant,
+        "good_variant": p.good_variant,
+        "reference_model": p.reference_model,
+        "expected_pathologies": p.expected_pathologies,
+        "difficulty": p.difficulty,
+    }
+    click.echo(json.dumps(info, indent=2))
 
 
 def _read_actual_csv(path: Path) -> dict[str, list[float]]:

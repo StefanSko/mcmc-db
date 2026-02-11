@@ -1,0 +1,9 @@
+{
+  "name": "eight_schools",
+  "description": "Eight Schools: canonical hierarchical model from Rubin (1981)",
+  "bad_variant": "centered",
+  "good_variant": "noncentered",
+  "reference_model": "eight_schools-noncentered",
+  "expected_pathologies": ["divergences", "high_rhat", "low_ess"],
+  "difficulty": "easy-medium"
+}

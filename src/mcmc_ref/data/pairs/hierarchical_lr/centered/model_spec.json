@@ -1,0 +1,24 @@
+{
+  "parameters": [
+    {"name": "mu_alpha", "shape": [], "constraint": "real"},
+    {"name": "sigma_alpha", "shape": [], "constraint": "lower=0"},
+    {"name": "alpha", "shape": [6], "constraint": "real"},
+    {"name": "beta", "shape": [], "constraint": "real"},
+    {"name": "sigma_y", "shape": [], "constraint": "lower=0"}
+  ],
+  "data": [
+    {"name": "N", "type": "int"},
+    {"name": "K", "type": "int"},
+    {"name": "group", "type": "int", "shape": ["N"]},
+    {"name": "x", "type": "real", "shape": ["N"]},
+    {"name": "y", "type": "real", "shape": ["N"]}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "mu_alpha", "mean": 0, "sd": 10},
+    {"type": "half_normal", "variate": "sigma_alpha", "sd": 5},
+    {"type": "normal", "variate": "alpha", "mean": "mu_alpha", "sd": "sigma_alpha"},
+    {"type": "normal", "variate": "beta", "mean": 0, "sd": 5},
+    {"type": "half_normal", "variate": "sigma_y", "sd": 5},
+    {"type": "normal", "variate": "y", "mean": "alpha[group] + beta * x", "sd": "sigma_y"}
+  ]
+}
