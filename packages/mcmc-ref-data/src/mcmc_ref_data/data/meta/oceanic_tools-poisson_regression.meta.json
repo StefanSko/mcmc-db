@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 9545.777051217528,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001475835181264
+    },
+    "beta_contact": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9827.268909610144,
+      "rhat": 1.0001325036310618
+    },
+    "beta_interaction": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9842.702455215262,
+      "rhat": 0.9999457360950221
+    },
+    "beta_pop": {
+      "ess_bulk": 9321.415723181697,
+      "ess_tail": 9985.909523768993,
+      "rhat": 0.999893554111742
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "oceanic_tools-poisson_regression",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "beta_contact",
+    "beta_interaction",
+    "beta_pop"
+  ],
+  "source": "converted"
+}

@@ -179,7 +179,7 @@ wheels = [
 
 [[package]]
 name = "mcmc-ref"
-version = "0.0.0"
+version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "click" },
@@ -222,7 +222,7 @@ provides-extras = ["extras", "dev", "data", "generate", "bootstrap"]
 
 [[package]]
 name = "mcmc-ref-data"
-version = "0.0.0"
+version = "0.1.0"
 source = { directory = "packages/mcmc-ref-data" }
 
 [[package]]

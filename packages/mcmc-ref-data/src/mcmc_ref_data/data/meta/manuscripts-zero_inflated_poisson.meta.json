@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9787.870924233197,
+      "rhat": 0.9996856871864866
+    },
+    "theta": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002448519438636
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "manuscripts-zero_inflated_poisson",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "theta"
+  ],
+  "source": "converted"
+}

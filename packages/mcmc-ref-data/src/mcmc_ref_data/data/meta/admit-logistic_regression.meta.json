@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 9410.566645046725,
+      "ess_tail": 9955.75517211538,
+      "rhat": 0.9998916992668676
+    },
+    "beta": {
+      "ess_bulk": 9779.258552789568,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000032170962254
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "admit-logistic_regression",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "beta"
+  ],
+  "source": "converted"
+}
