@@ -54,7 +54,7 @@ def generate_reference_draws(
             name=model_name,
             out_draws_dir=draws_dir,
             out_meta_dir=meta_dir,
-            force=True,
+            force=False,
         )
 
     return draws_dir / f"{model_name}.draws.parquet"
@@ -140,22 +140,21 @@ def _compile_and_sample(
     thin: int,
     seed: int,
 ):
-    import cmdstanpy  # type: ignore[import-untyped]
+    import cmdstanpy
 
-    # Use a persistent temp dir so the compiled binary survives through sampling
-    tmpdir = tempfile.mkdtemp()
-    stan_file = Path(tmpdir) / "model.stan"
-    stan_file.write_text(stan_code)
-    model = cmdstanpy.CmdStanModel(stan_file=str(stan_file))
+    with tempfile.TemporaryDirectory() as tmpdir:
+        stan_file = Path(tmpdir) / "model.stan"
+        stan_file.write_text(stan_code)
+        model = cmdstanpy.CmdStanModel(stan_file=str(stan_file))
 
-    fit = model.sample(
-        data=stan_data,
-        chains=chains,
-        iter_warmup=iter_warmup,
-        iter_sampling=iter_sampling,
-        thin=thin,
-        seed=seed,
-    )
+        fit = model.sample(
+            data=stan_data,
+            chains=chains,
+            iter_warmup=iter_warmup,
+            iter_sampling=iter_sampling,
+            thin=thin,
+            seed=seed,
+        )
     return fit
 
 
