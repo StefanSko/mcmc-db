@@ -11,16 +11,18 @@ dependencies = [
 
 [project.optional-dependencies]
 extras = ["numpy>=1.24"]
-build = ["cmdstanpy>=1.2"]
 dev = ["pytest>=8.2", "ruff>=0.5.0", "ty>=0.0.1"]
+data = ["mcmc-ref-data==0.0.0"]
+generate = ["cmdstanpy>=1.2.5"]
+bootstrap = ["posteriordb>=0.2.0"]
 
 [project.scripts]
 mcmc-ref = "mcmc_ref.cli:main"
 mcmc-ref-build-references = "mcmc_ref.build_references:main"
-mcmc-ref-generate = "mcmc_ref.generate_draws:main"
+mcmc-ref-import-informed = "mcmc_ref.informed_references:main"
 
-[tool.setuptools.package-data]
-mcmc_ref = ["data/**/*.json", "data/**/*.parquet", "data/**/*.stan"]
+[tool.uv.sources]
+mcmc-ref-data = { path = "packages/mcmc-ref-data" }
 
 [tool.ruff]
 line-length = 100

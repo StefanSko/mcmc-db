@@ -16,8 +16,6 @@ class StorePaths:
     root: Path
     draws: Path
     meta: Path
-    stan_data: Path
-    stan_code: Path
 
 
 class DataStore:
@@ -35,28 +33,26 @@ class DataStore:
         return sorted(names)
 
     def resolve_draws_path(self, model: str) -> Path:
-        return self._resolve(model, "draws", ".draws.parquet")
+        local = self._resolve_in_root(self._local, model, "draws", ".draws.parquet")
+        if local is not None:
+            return local
+        packaged = self._resolve_in_root(self._packaged, model, "draws", ".draws.parquet")
+        if packaged is not None:
+            return packaged
+        raise FileNotFoundError(f"draws not found for model: {model}")
 
     def resolve_meta_path(self, model: str) -> Path:
-        return self._resolve(model, "meta", ".meta.json")
+        local = self._resolve_in_root(self._local, model, "meta", ".meta.json")
+        if local is not None:
+            return local
+        packaged = self._resolve_in_root(self._packaged, model, "meta", ".meta.json")
+        if packaged is not None:
+            return packaged
+        raise FileNotFoundError(f"metadata not found for model: {model}")
 
     def read_meta(self, model: str) -> dict:
         path = self.resolve_meta_path(model)
         return json.loads(path.read_text())
-
-    def resolve_stan_data_path(self, model: str) -> Path:
-        return self._resolve(model, "stan_data", ".data.json")
-
-    def resolve_stan_code_path(self, model: str) -> Path:
-        return self._resolve(model, "stan_code", ".stan")
-
-    def read_stan_data(self, model: str) -> dict:
-        path = self.resolve_stan_data_path(model)
-        return json.loads(path.read_text())
-
-    def read_stan_code(self, model: str) -> str:
-        path = self.resolve_stan_code_path(model)
-        return path.read_text()
 
     def open_draws(
         self,
@@ -81,13 +77,6 @@ class DataStore:
             return [c for c in columns if c not in {"chain", "draw"}]
         return list(params)
 
-    def _resolve(self, model: str, subdir: str, suffix: str) -> Path:
-        for root in (self._local, self._packaged):
-            result = self._resolve_in_root(root, model, subdir, suffix)
-            if result is not None:
-                return result
-        raise FileNotFoundError(f"{subdir} not found for model: {model}")
-
     def _resolve_in_root(
         self, root: StorePaths | None, model: str, subdir: str, suffix: str
     ) -> Path | None:
@@ -101,13 +90,10 @@ class DataStore:
             return None
         draws = root / "draws"
         meta = root / "meta"
-        stan_data = root / "stan_data"
-        stan_code = root / "stan_code"
-        if not any(d.exists() for d in (draws, meta, stan_data, stan_code)):
+        pairs = root / "pairs"
+        if not draws.exists() and not meta.exists() and not pairs.exists():
             return None
-        return StorePaths(
-            root=root, draws=draws, meta=meta, stan_data=stan_data, stan_code=stan_code
-        )
+        return StorePaths(root=root, draws=draws, meta=meta)
 
 
 def _default_local_root() -> Path:
@@ -120,8 +106,16 @@ def _default_local_root() -> Path:
 def _default_packaged_root() -> Path | None:
     try:
         from importlib import resources
-
-        package = resources.files("mcmc_ref").joinpath("data")
-        return Path(str(package))
     except Exception:
         return None
+
+    for package_name in ("mcmc_ref", "mcmc_ref_data"):
+        try:
+            package_data = Path(str(resources.files(package_name).joinpath("data")))
+        except Exception:
+            continue
+        draws = package_data / "draws"
+        meta = package_data / "meta"
+        if draws.exists() or meta.exists():
+            return package_data
+    return None

@@ -1,0 +1,41 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha0": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003397715983893
+    },
+    "alpha1": {
+      "ess_bulk": 9842.061481287144,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004854908278036
+    },
+    "beta1": {
+      "ess_bulk": 9765.217682899674,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000106302553982
+    },
+    "mu": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003567612802708
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "garch-garch11",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha0",
+    "alpha1",
+    "beta1",
+    "mu"
+  ],
+  "source": "converted"
+}

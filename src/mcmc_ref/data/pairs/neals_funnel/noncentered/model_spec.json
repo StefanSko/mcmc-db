@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    {"name": "v", "shape": [], "constraint": "real"},
+    {"name": "x_raw", "shape": [9], "constraint": "real"}
+  ],
+  "transformed_parameters": [
+    {"name": "x", "shape": [9], "expression": "x_raw * exp(v / 2)"}
+  ],
+  "data": [
+    {"name": "N", "type": "int"}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "v", "mean": 0, "sd": 3},
+    {"type": "normal", "variate": "x_raw", "mean": 0, "sd": 1}
+  ]
+}

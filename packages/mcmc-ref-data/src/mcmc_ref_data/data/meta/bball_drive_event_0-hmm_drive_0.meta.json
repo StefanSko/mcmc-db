@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "lambda[1]": {
+      "ess_bulk": 9912.012505849943,
+      "ess_tail": 9400.094060057774,
+      "rhat": 1.000754625408072
+    },
+    "lambda[2]": {
+      "ess_bulk": 9865.28270400554,
+      "ess_tail": 9896.888682440684,
+      "rhat": 1.0000179745120599
+    },
+    "phi[1]": {
+      "ess_bulk": 9668.262607258697,
+      "ess_tail": 10000.0,
+      "rhat": 1.0010120163231155
+    },
+    "phi[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9591.999561156103,
+      "rhat": 1.0001418528984896
+    },
+    "theta1[1]": {
+      "ess_bulk": 9834.74111493679,
+      "ess_tail": 9896.070468004897,
+      "rhat": 1.0000705031062236
+    },
+    "theta1[2]": {
+      "ess_bulk": 9834.74111493679,
+      "ess_tail": 9896.070468004897,
+      "rhat": 1.0000705031062236
+    },
+    "theta2[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9586.865012228158,
+      "rhat": 0.9998461248832282
+    },
+    "theta2[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9587.652167885873,
+      "rhat": 0.9998455074707597
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "bball_drive_event_0-hmm_drive_0",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "lambda[1]",
+    "lambda[2]",
+    "phi[1]",
+    "phi[2]",
+    "theta1[1]",
+    "theta1[2]",
+    "theta2[1]",
+    "theta2[2]"
+  ],
+  "source": "converted"
+}

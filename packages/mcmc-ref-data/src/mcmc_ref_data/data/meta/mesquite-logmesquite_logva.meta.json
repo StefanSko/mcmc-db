@@ -1,0 +1,47 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9861.78125853488,
+      "rhat": 0.999869988132486
+    },
+    "beta[2]": {
+      "ess_bulk": 9972.008432606353,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001827304359125
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001706564460737
+    },
+    "beta[4]": {
+      "ess_bulk": 9960.45839815239,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999075736077864
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0012544983139988
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "mesquite-logmesquite_logva",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "sigma"
+  ],
+  "source": "converted"
+}

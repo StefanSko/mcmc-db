@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9752.098251324604,
+      "ess_tail": 9601.320907235737,
+      "rhat": 1.0002898548094665
+    },
+    "beta[2]": {
+      "ess_bulk": 9797.055142453353,
+      "ess_tail": 10000.0,
+      "rhat": 1.0005322021946934
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9716.327946148496,
+      "rhat": 0.9998825767152891
+    },
+    "beta[4]": {
+      "ess_bulk": 9955.491158792662,
+      "ess_tail": 10000.0,
+      "rhat": 0.999885782702784
+    },
+    "beta[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000593503601127
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002937734512778
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "sblri-blr",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "sigma"
+  ],
+  "source": "converted"
+}

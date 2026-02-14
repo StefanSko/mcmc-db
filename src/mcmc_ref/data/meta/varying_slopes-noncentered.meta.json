@@ -1,0 +1,263 @@
+{
+  "model": "varying_slopes-noncentered",
+  "parameters": [
+    "mu.1",
+    "mu.2",
+    "sigma.1",
+    "sigma.2",
+    "L_Rho.1.1",
+    "L_Rho.2.1",
+    "L_Rho.1.2",
+    "L_Rho.2.2",
+    "z_raw.1.1",
+    "z_raw.2.1",
+    "z_raw.3.1",
+    "z_raw.4.1",
+    "z_raw.5.1",
+    "z_raw.6.1",
+    "z_raw.7.1",
+    "z_raw.8.1",
+    "z_raw.1.2",
+    "z_raw.2.2",
+    "z_raw.3.2",
+    "z_raw.4.2",
+    "z_raw.5.2",
+    "z_raw.6.2",
+    "z_raw.7.2",
+    "z_raw.8.2",
+    "sigma_y",
+    "z.1.1",
+    "z.2.1",
+    "z.3.1",
+    "z.4.1",
+    "z.5.1",
+    "z.6.1",
+    "z.7.1",
+    "z.8.1",
+    "z.1.2",
+    "z.2.2",
+    "z.3.2",
+    "z.4.2",
+    "z.5.2",
+    "z.6.2",
+    "z.7.2",
+    "z.8.2"
+  ],
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "diagnostics": {
+    "mu.1": {
+      "rhat": 1.0021,
+      "ess_bulk": 2186.2,
+      "ess_tail": 3599.9
+    },
+    "mu.2": {
+      "rhat": 1.0014,
+      "ess_bulk": 3822.3,
+      "ess_tail": 4248.6
+    },
+    "sigma.1": {
+      "rhat": 1.0029,
+      "ess_bulk": 2908.9,
+      "ess_tail": 4749.2
+    },
+    "sigma.2": {
+      "rhat": 1.0035,
+      "ess_bulk": 2175.0,
+      "ess_tail": 5753.8
+    },
+    "L_Rho.1.1": {
+      "rhat": 1.0,
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0
+    },
+    "L_Rho.2.1": {
+      "rhat": 1.0014,
+      "ess_bulk": 6053.9,
+      "ess_tail": 6140.5
+    },
+    "L_Rho.1.2": {
+      "rhat": 1.0,
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0
+    },
+    "L_Rho.2.2": {
+      "rhat": 1.0013,
+      "ess_bulk": 6497.1,
+      "ess_tail": 6155.4
+    },
+    "z_raw.1.1": {
+      "rhat": 1.0023,
+      "ess_bulk": 2619.9,
+      "ess_tail": 4899.2
+    },
+    "z_raw.2.1": {
+      "rhat": 1.0017,
+      "ess_bulk": 2390.0,
+      "ess_tail": 4653.0
+    },
+    "z_raw.3.1": {
+      "rhat": 1.0022,
+      "ess_bulk": 2610.8,
+      "ess_tail": 4959.2
+    },
+    "z_raw.4.1": {
+      "rhat": 1.0024,
+      "ess_bulk": 2627.9,
+      "ess_tail": 4861.3
+    },
+    "z_raw.5.1": {
+      "rhat": 1.0022,
+      "ess_bulk": 3041.0,
+      "ess_tail": 5443.7
+    },
+    "z_raw.6.1": {
+      "rhat": 1.0012,
+      "ess_bulk": 3614.9,
+      "ess_tail": 6061.0
+    },
+    "z_raw.7.1": {
+      "rhat": 1.0009,
+      "ess_bulk": 3534.4,
+      "ess_tail": 5691.1
+    },
+    "z_raw.8.1": {
+      "rhat": 1.0015,
+      "ess_bulk": 4802.6,
+      "ess_tail": 5884.5
+    },
+    "z_raw.1.2": {
+      "rhat": 1.0006,
+      "ess_bulk": 7170.4,
+      "ess_tail": 6397.9
+    },
+    "z_raw.2.2": {
+      "rhat": 1.0005,
+      "ess_bulk": 6838.1,
+      "ess_tail": 5929.3
+    },
+    "z_raw.3.2": {
+      "rhat": 1.0014,
+      "ess_bulk": 8221.2,
+      "ess_tail": 6065.2
+    },
+    "z_raw.4.2": {
+      "rhat": 1.001,
+      "ess_bulk": 6505.8,
+      "ess_tail": 6343.4
+    },
+    "z_raw.5.2": {
+      "rhat": 1.0006,
+      "ess_bulk": 9049.1,
+      "ess_tail": 5703.2
+    },
+    "z_raw.6.2": {
+      "rhat": 1.0004,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5582.6
+    },
+    "z_raw.7.2": {
+      "rhat": 1.0004,
+      "ess_bulk": 10000.0,
+      "ess_tail": 4780.2
+    },
+    "z_raw.8.2": {
+      "rhat": 1.0006,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5106.3
+    },
+    "sigma_y": {
+      "rhat": 1.001,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5518.0
+    },
+    "z.1.1": {
+      "rhat": 1.0001,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7438.7
+    },
+    "z.2.1": {
+      "rhat": 1.0,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7369.5
+    },
+    "z.3.1": {
+      "rhat": 1.0002,
+      "ess_bulk": 10000.0,
+      "ess_tail": 6731.2
+    },
+    "z.4.1": {
+      "rhat": 0.9996,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7916.0
+    },
+    "z.5.1": {
+      "rhat": 1.0011,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5151.8
+    },
+    "z.6.1": {
+      "rhat": 1.0004,
+      "ess_bulk": 10000.0,
+      "ess_tail": 6706.8
+    },
+    "z.7.1": {
+      "rhat": 1.0011,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5563.5
+    },
+    "z.8.1": {
+      "rhat": 1.0021,
+      "ess_bulk": 10000.0,
+      "ess_tail": 4820.1
+    },
+    "z.1.2": {
+      "rhat": 1.0,
+      "ess_bulk": 10000.0,
+      "ess_tail": 8562.6
+    },
+    "z.2.2": {
+      "rhat": 1.0,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7928.3
+    },
+    "z.3.2": {
+      "rhat": 1.0003,
+      "ess_bulk": 10000.0,
+      "ess_tail": 8413.1
+    },
+    "z.4.2": {
+      "rhat": 1.0002,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7298.5
+    },
+    "z.5.2": {
+      "rhat": 1.0006,
+      "ess_bulk": 10000.0,
+      "ess_tail": 7811.3
+    },
+    "z.6.2": {
+      "rhat": 1.003,
+      "ess_bulk": 3277.4,
+      "ess_tail": 7137.1
+    },
+    "z.7.2": {
+      "rhat": 1.0011,
+      "ess_bulk": 7016.0,
+      "ess_tail": 5034.6
+    },
+    "z.8.2": {
+      "rhat": 1.0019,
+      "ess_bulk": 10000.0,
+      "ess_tail": 3695.9
+    }
+  },
+  "generated_date": "2026-02-11",
+  "checks": {
+    "ndraws_is_10k": true,
+    "nchains_is_gte_4": true,
+    "ess_above_400": true,
+    "rhat_below_1_01": true
+  },
+  "source": "cmdstan-2.37.0"
+}

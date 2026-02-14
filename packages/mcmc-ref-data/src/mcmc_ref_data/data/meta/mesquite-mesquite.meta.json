@@ -1,0 +1,65 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0007466761987311
+    },
+    "beta[2]": {
+      "ess_bulk": 9674.33032889415,
+      "ess_tail": 9789.73146509166,
+      "rhat": 1.0005364979180642
+    },
+    "beta[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000292258991244
+    },
+    "beta[4]": {
+      "ess_bulk": 9650.430148420603,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002871496173438
+    },
+    "beta[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0005298341710829
+    },
+    "beta[6]": {
+      "ess_bulk": 9741.55691682221,
+      "ess_tail": 10000.0,
+      "rhat": 1.000122422970553
+    },
+    "beta[7]": {
+      "ess_bulk": 9733.308556470643,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000416523952869
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9844.642074481539,
+      "rhat": 1.0003035771339808
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "mesquite-mesquite",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "beta[3]",
+    "beta[4]",
+    "beta[5]",
+    "beta[6]",
+    "beta[7]",
+    "sigma"
+  ],
+  "source": "converted"
+}
