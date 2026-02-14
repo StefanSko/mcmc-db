@@ -74,7 +74,7 @@ def test_default_packaged_root_falls_back_to_data_package(tmp_path: Path, monkey
     assert root == data_pkg / "data"
 
 
-def test_default_packaged_root_prefers_core_package_when_present(
+def test_default_packaged_root_prefers_data_package_when_present(
     tmp_path: Path, monkeypatch
 ) -> None:
     core_pkg = tmp_path / "core_pkg"
@@ -95,4 +95,28 @@ def test_default_packaged_root_prefers_core_package_when_present(
 
     root = store_mod._default_packaged_root()
 
-    assert root == core_pkg / "data"
+    assert root == data_pkg / "data"
+
+
+def test_datastore_reads_stan_assets_from_root_with_only_stan_dirs(tmp_path: Path) -> None:
+    stan_data_dir = tmp_path / "stan_data"
+    stan_code_dir = tmp_path / "stan_code"
+    stan_data_dir.mkdir()
+    stan_code_dir.mkdir()
+    (stan_data_dir / "example.data.json").write_text('{"N": 10}')
+    (stan_code_dir / "example.stan").write_text("data { int N; }")
+
+    store = DataStore(local_root=tmp_path, packaged_root=None)
+
+    assert store.read_stan_data("example") == {"N": 10}
+    assert store.read_stan_code("example") == "data { int N; }"
+
+
+def test_datastore_resolves_stan_code_from_stan_models(tmp_path: Path) -> None:
+    stan_models_dir = tmp_path / "stan_models"
+    stan_models_dir.mkdir()
+    (stan_models_dir / "example.stan").write_text("parameters { real mu; }")
+
+    store = DataStore(local_root=tmp_path, packaged_root=None)
+
+    assert store.read_stan_code("example") == "parameters { real mu; }"

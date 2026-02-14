@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "mcmc-ref-data"
-version = "0.0.0"
+version = "0.1.0"
 description = "Reference draw corpus for mcmc-ref"
 readme = "README.md"
 requires-python = ">=3.10"

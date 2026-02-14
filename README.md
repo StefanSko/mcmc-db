@@ -6,6 +6,7 @@ For installation, integration, data build/publish workflow, and CI patterns,
 see:
 
 - `docs/integration-guide.md`
+- `docs/release-checklist.md`
 
 Current packaged corpus includes both default posteriordb references and
 informed-prior variants (for models where informed references are available),
