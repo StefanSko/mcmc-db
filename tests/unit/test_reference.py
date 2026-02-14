@@ -10,7 +10,7 @@ from mcmc_ref.draws import Draws
 from mcmc_ref.store import DataStore
 
 
-def _write_parquet(path: Path) -> None:
+def _write_draws_parquet(path: Path) -> None:
     table = pa.table(
         {
             "chain": pa.array([0, 0, 1, 1, 2, 2, 3, 3], type=pa.int32()),
@@ -26,7 +26,7 @@ def test_reference_draws_returns_wrapper(tmp_path: Path) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
     store = DataStore(local_root=tmp_path)
@@ -40,7 +40,7 @@ def test_reference_draws_return_arrow(tmp_path: Path) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
     store = DataStore(local_root=tmp_path)
@@ -54,7 +54,7 @@ def test_reference_draws_return_list(tmp_path: Path) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
     store = DataStore(local_root=tmp_path)
@@ -62,3 +62,23 @@ def test_reference_draws_return_list(tmp_path: Path) -> None:
 
     assert isinstance(result, list)
     assert result
+
+
+def test_stan_data(tmp_path: Path) -> None:
+    stan_data_dir = tmp_path / "stan_data"
+    stan_data_dir.mkdir()
+    (stan_data_dir / "example.data.json").write_text('{"N": 10, "x": [1, 2, 3]}')
+
+    store = DataStore(local_root=tmp_path)
+    data = reference.stan_data("example", store=store)
+    assert data == {"N": 10, "x": [1, 2, 3]}
+
+
+def test_model_code(tmp_path: Path) -> None:
+    stan_code_dir = tmp_path / "stan_code"
+    stan_code_dir.mkdir()
+    (stan_code_dir / "example.stan").write_text("data { int N; }")
+
+    store = DataStore(local_root=tmp_path)
+    code = reference.model_code("example", store=store)
+    assert code == "data { int N; }"
