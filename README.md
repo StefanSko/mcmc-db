@@ -18,32 +18,86 @@ uv run ty check .
 uv run pytest
 ```
 
-### CLI example
+## Bundled Models
+
+mcmc-ref ships complete assets (draws, metadata, Stan data, Stan code) for these models:
+
+| Model | Type | Params |
+|-------|------|--------|
+| `wells_data-wells_dist` | Logistic regression | 2 |
+| `GLM_Binomial_data-GLM_Binomial_model` | Binomial GLM | 3 + generated quantities |
+| `GLM_Poisson_Data-GLM_Poisson_model` | Poisson GLM | 4 + generated quantities |
+| `radon_mn-radon_hierarchical_intercept_noncentered` | Hierarchical | ~90 |
+| `irt_2pl-irt_2pl` | IRT 2PL | ~125 |
+
+All reference draws: 10 chains x 1,000 draws, R-hat < 1.01, ESS > 400.
+
+## CLI
 
 ```bash
-mcmc-ref stats eight_schools --include-diagnostics --quantile-mode exact
+# List all available models
+mcmc-ref list
+
+# Get Stan input data as JSON
+mcmc-ref data wells_data-wells_dist
+
+# Get Stan model code
+mcmc-ref model-code wells_data-wells_dist
+
+# Summary statistics
+mcmc-ref stats wells_data-wells_dist --include-diagnostics --format json
+
+# Diagnostics (R-hat, ESS)
+mcmc-ref diagnostics wells_data-wells_dist
+
+# Compare sampler output against reference
+mcmc-ref compare wells_data-wells_dist --actual my_results.csv --tolerance 0.15
 ```
 
-### Compare example
-
-```bash
-mcmc-ref compare eight_schools --actual my_results.csv --tolerance 0.15
-```
-
-### Python API example
+## Python API
 
 ```python
 from mcmc_ref import reference
 
-# Arrow by default
-table = reference.draws("eight_schools", return_="arrow")
+# Stan input data (dict)
+data = reference.stan_data("wells_data-wells_dist")
 
-# Wrapper with conversion helpers
-draws = reference.draws("eight_schools", return_="draws")
-numpy_draws = draws.to_numpy()  # requires numpy
+# Stan model code (str)
+code = reference.model_code("wells_data-wells_dist")
+
+# Reference draws (Arrow table)
+table = reference.draws("wells_data-wells_dist", return_="arrow")
+
+# Summary statistics
+stats = reference.stats("wells_data-wells_dist")
+
+# Diagnostics
+diag = reference.diagnostics_for_model("wells_data-wells_dist")
+
+# Compare actual draws against reference
+result = reference.compare("wells_data-wells_dist", actual={"beta[1]": [...], "beta[2]": [...]})
+assert result.passed, result.failures
 ```
 
-### Diagnostics example
+### Consumer Integration Guide
+
+```python
+from mcmc_ref import reference
+
+# 1. Load Stan data and model code
+data = reference.stan_data("wells_data-wells_dist")
+code = reference.model_code("wells_data-wells_dist")
+
+# 2. Compile and sample with your library
+model = your_library.compile(code)
+fit = model.sample(data, num_chains=4, num_samples=1000)
+
+# 3. Compare against reference draws
+result = reference.compare("wells_data-wells_dist", fit.as_dict(), tolerance=0.15)
+assert result.passed, "\n".join(result.failures)
+```
+
+### Diagnostics
 
 ```python
 from mcmc_ref import diagnostics
@@ -53,7 +107,7 @@ rhat = diagnostics.split_rhat(chains)
 ess = diagnostics.ess_bulk(chains)
 ```
 
-## Reference draws
+## Reference Draws
 
 When generating reference draws, follow Stan's prior-choice recommendations:
 avoid flat/super-vague priors, prefer weakly informative priors on a sensible
@@ -66,8 +120,15 @@ These diagnostics require at least 4 independent chains by default; use
 explicit override paths (for example `convert --force`) only when you
 intentionally want single-chain conversion with diagnostic metrics marked `nan`.
 
-For integration tests, you can optionally generate missing reference draws by
-setting `MCMC_REF_GENERATE=1` and (optionally) `MCMC_REF_GENERATE_MODEL=...`.
+### Generate Reference Draws
+
+To generate draws for a model that has bundled Stan data and code:
+
+```bash
+uv run --extra build mcmc-ref-generate wells_data-wells_dist
+```
+
+Settings: 10 chains, 10,000 warmup, 10,000 sampling, thin=10, seed=4711.
 
 ## Build Canonical References
 
@@ -137,5 +198,5 @@ reference naming convention.
 Brainstorm:
     -https://gisthost.github.io/?a47c363027aba4615cd3247ed5f88793
 
-Implemntation: 
+Implemntation:
     -https://gistpreview.github.io/?018116c7a98a7d75e363e77689ec7b26

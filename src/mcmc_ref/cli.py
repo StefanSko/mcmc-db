@@ -36,6 +36,20 @@ def list_cmd(format_: str) -> None:
         click.echo(model)
 
 
+@main.command("data")
+@click.argument("model")
+def data_cmd(model: str) -> None:
+    data = reference.stan_data(model)
+    click.echo(json.dumps(data, indent=2))
+
+
+@main.command("model-code")
+@click.argument("model")
+def model_code_cmd(model: str) -> None:
+    code = reference.model_code(model)
+    click.echo(code)
+
+
 @main.command("stats")
 @click.argument("model")
 @click.option("--params", default=None, help="Comma-separated parameter list")
@@ -106,11 +120,8 @@ def draws_cmd(
 
     if format_ == "parquet":
         table = draws.read_all() if hasattr(draws, "read_all") else draws
-        if output is None:
-            buf = pq.write_table(table, sys.stdout.buffer)
-            _ = buf
-        else:
-            pq.write_table(table, output)
+        dest = sys.stdout.buffer if output is None else output
+        pq.write_table(table, dest)
         return
 
 
@@ -189,11 +200,8 @@ def convert_cmd(input_path: Path, name: str, force: bool) -> None:
 
 def _read_actual_csv(path: Path) -> dict[str, list[float]]:
     table = pacsv.read_csv(path)
-    cols = [c for c in table.column_names if c not in {"chain", "draw"}]
-    actual: dict[str, list[float]] = {}
-    for param in cols:
-        actual[param] = [float(v) for v in table.column(param).to_pylist()]
-    return actual
+    params = [c for c in table.column_names if c not in {"chain", "draw"}]
+    return {p: [float(v) for v in table.column(p).to_pylist()] for p in params}
 
 
 def _metric_headers(stats: dict[str, dict[str, float]]) -> list[str]:
