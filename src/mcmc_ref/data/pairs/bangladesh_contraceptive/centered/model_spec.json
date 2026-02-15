@@ -1,0 +1,22 @@
+{
+  "parameters": [
+    {"name": "mu", "shape": [2], "constraint": "real"},
+    {"name": "sigma", "shape": [2], "constraint": "lower=0"},
+    {"name": "L_Rho", "shape": [2, 2], "constraint": "cholesky_factor_corr"},
+    {"name": "z", "shape": [30, 2], "constraint": "real"}
+  ],
+  "data": [
+    {"name": "N", "type": "int"},
+    {"name": "D", "type": "int"},
+    {"name": "district", "type": "int", "shape": ["N"]},
+    {"name": "urban", "type": "int", "shape": ["N"]},
+    {"name": "y", "type": "int", "shape": ["N"]}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "mu", "mean": 0, "sd": 1},
+    {"type": "exponential", "variate": "sigma", "rate": 1},
+    {"type": "lkj_corr_cholesky", "variate": "L_Rho", "eta": 2},
+    {"type": "multi_normal_cholesky", "variate": "z", "mean": "mu", "L": "diag_pre_multiply(sigma, L_Rho)"},
+    {"type": "bernoulli_logit", "variate": "y", "logit_p": "z[district, 1] + z[district, 2] .* to_vector(urban)"}
+  ]
+}

@@ -14,9 +14,10 @@ def test_cli_pairs_lists_bundled_pairs() -> None:
     result = runner.invoke(main, ["pairs"])
 
     assert result.exit_code == 0
-    assert "neals_funnel" in result.output
+    assert "bangladesh_contraceptive" in result.output
     assert "eight_schools" in result.output
     assert "hierarchical_lr" in result.output
+    assert "neals_funnel" in result.output
     assert "varying_slopes" in result.output
 
 

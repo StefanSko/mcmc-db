@@ -229,13 +229,14 @@ def test_pair_not_found_raises(tmp_path: Path) -> None:
 
 
 def test_bundled_pairs_discoverable() -> None:
-    """The package should bundle all 4 reparametrization pairs."""
+    """The package should bundle all 5 reparametrization pairs."""
     from mcmc_ref.pairs import list_pairs
 
     pairs = list_pairs()
-    assert "neals_funnel" in pairs
+    assert "bangladesh_contraceptive" in pairs
     assert "eight_schools" in pairs
     assert "hierarchical_lr" in pairs
+    assert "neals_funnel" in pairs
     assert "varying_slopes" in pairs
 
 

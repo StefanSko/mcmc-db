@@ -1,0 +1,9 @@
+{
+  "name": "bangladesh_contraceptive",
+  "description": "Varying intercepts and slopes for contraceptive usage across districts with LKJ correlation prior",
+  "bad_variant": "centered",
+  "good_variant": "noncentered",
+  "reference_model": "bangladesh_contraceptive-noncentered",
+  "expected_pathologies": ["divergences", "high_rhat", "low_ess"],
+  "difficulty": "hard"
+}
