@@ -36,5 +36,5 @@ uv publish
 ## 4) Consumer install (jaxstanv3)
 
 ```bash
-uv add "mcmc-ref[data]==0.1.0"
+uv add "mcmc-ref[data]==0.1.1"
 ```

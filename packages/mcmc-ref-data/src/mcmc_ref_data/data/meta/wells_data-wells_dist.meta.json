@@ -1,0 +1,29 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9619.430021458506,
+      "ess_tail": 9624.483405182238,
+      "rhat": 1.0004430408487264
+    },
+    "beta[2]": {
+      "ess_bulk": 9895.066287157113,
+      "ess_tail": 10000.0,
+      "rhat": 1.0005336747595803
+    }
+  },
+  "generated_date": "2026-02-14",
+  "model": "wells_data-wells_dist",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]"
+  ],
+  "source": "converted"
+}

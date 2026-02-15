@@ -7,6 +7,7 @@ see:
 
 - `docs/integration-guide.md`
 - `docs/release-checklist.md`
+- `docs/releases/0.1.1.md`
 
 Current packaged corpus includes both default posteriordb references and
 informed-prior variants (for models where informed references are available),
