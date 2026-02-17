@@ -1,6 +1,6 @@
 [project]
 name = "mcmc-ref"
-version = "0.1.1"
+version = "0.1.2"
 description = "Reference posterior validation tool"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,7 +12,7 @@ dependencies = [
 [project.optional-dependencies]
 extras = ["numpy>=1.24"]
 dev = ["pytest>=8.2", "ruff>=0.5.0", "ty>=0.0.1"]
-data = ["mcmc-ref-data==0.1.1"]
+data = ["mcmc-ref-data==0.1.2"]
 generate = ["cmdstanpy>=1.2.5"]
 bootstrap = ["posteriordb>=0.2.0"]
 

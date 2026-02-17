@@ -241,10 +241,25 @@ def test_bundled_pairs_discoverable() -> None:
 
 
 def test_bundled_pair_has_reference_draws() -> None:
-    """Each bundled good variant should have reference draws."""
-    from mcmc_ref.pairs import pair
+    """Bundled pairs should expose usable reference draws and stats."""
+    from mcmc_ref.pairs import list_pairs, pair
 
-    p = pair("neals_funnel")
-    draws = p.reference_draws
-    assert draws is not None
-    assert "v" in draws.params
+    for name in list_pairs():
+        p = pair(name)
+        draws = p.reference_draws
+        stats = p.reference_stats
+        assert draws is not None
+        assert isinstance(stats, dict)
+
+
+def test_bundled_pair_reference_meta_is_cmdstan_generated() -> None:
+    from mcmc_ref.pairs import list_pairs, pair
+    from mcmc_ref.store import DataStore
+
+    store = DataStore()
+    for name in list_pairs(store=store):
+        p = pair(name, store=store)
+        meta = store.read_meta(p.reference_model)
+        source = meta.get("source")
+        assert isinstance(source, str)
+        assert source.startswith("cmdstan-")

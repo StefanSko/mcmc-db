@@ -16,6 +16,8 @@ Provide a minimal, consistent workflow for contributors and coding agents.
 - Unit tests for core logic.
 - Integration tests for CLI and data I/O.
 - Integration tests must compare against existing posteriordb models **when reference draws exist**.
+- Bundled reference artifacts (`draws/*.parquet`, `meta/*.json`) must come from real CmdStan sampling runs.
+- Never commit synthetic or mock reference draws/meta for bundled models or pairs.
 - If posteriordb draws are missing, fall back to checking the local cache:
   - `/tmp/jaxstanv3/tests/posteriordb/reference_draws` (data path, not executable)
 - If both are missing, integration tests may **optionally** generate reference draws
