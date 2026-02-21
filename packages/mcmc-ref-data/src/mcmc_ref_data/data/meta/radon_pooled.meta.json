@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta_0": {
+      "ess_bulk": 7810.247570820401,
+      "ess_tail": 5917.302632650515,
+      "rhat": 1.0005747955892175
+    },
+    "beta_1": {
+      "ess_bulk": 6672.739467812034,
+      "ess_tail": 4596.574062490497,
+      "rhat": 1.000331094605287
+    },
+    "sigma": {
+      "ess_bulk": 1519.5634432723296,
+      "ess_tail": 2077.4414131788863,
+      "rhat": 1.0033650558266844
+    }
+  },
+  "generated_date": "2026-02-21",
+  "model": "radon_pooled",
+  "n_chains": 4,
+  "n_draws_per_chain": 2500,
+  "parameters": [
+    "beta_0",
+    "beta_1",
+    "sigma"
+  ],
+  "source": "converted"
+}

@@ -20,7 +20,7 @@ class Draws:
     def to_numpy(self) -> Any:
         """Materialize to NumPy (raises if NumPy is not installed)."""
         try:
-            import numpy as np  # type: ignore[unresolved-import]
+            import numpy as np
         except Exception as exc:  # pragma: no cover - import guard
             raise ImportError("numpy is required for to_numpy()") from exc
 

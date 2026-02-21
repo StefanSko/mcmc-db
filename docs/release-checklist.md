@@ -22,7 +22,18 @@ uv build
 cd packages/mcmc-ref-data && uv build && cd ../..
 ```
 
-## 3) Publish order
+## 3) Data provenance refresh (before publish)
+
+```bash
+mcmc-ref provenance-scaffold --output-root /tmp/mcmc-db/provenance
+mcmc-ref provenance-generate --scaffold-root /tmp/mcmc-db/provenance --output-root /tmp/mcmc-db/generated
+mcmc-ref provenance-publish \
+  --source-root /tmp/mcmc-db/generated \
+  --scaffold-root /tmp/mcmc-db/provenance \
+  --package-root packages/mcmc-ref-data/src/mcmc_ref_data/data
+```
+
+## 4) Publish order
 
 Publish data package first, then core package:
 
@@ -33,8 +44,8 @@ cd ../..
 uv publish
 ```
 
-## 4) Consumer install (jaxstanv3)
+## 5) Consumer install (jaxstanv3)
 
 ```bash
-uv add "mcmc-ref[data]==0.1.1"
+uv add "mcmc-ref[data]==0.1.3"
 ```

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import importlib
 import tempfile
 from pathlib import Path
 
@@ -140,7 +141,13 @@ def _compile_and_sample(
     thin: int,
     seed: int,
 ):
-    import cmdstanpy
+    try:
+        cmdstanpy = importlib.import_module("cmdstanpy")
+    except Exception as exc:  # pragma: no cover
+        raise RuntimeError(
+            "cmdstanpy is required for draw generation. "
+            "Install with: uv add --optional generate cmdstanpy"
+        ) from exc
 
     with tempfile.TemporaryDirectory() as tmpdir:
         stan_file = Path(tmpdir) / "model.stan"

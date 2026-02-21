@@ -82,7 +82,7 @@ def _read_json_zip(path: Path) -> pa.Table:
     if not isinstance(payload, list) or not payload:
         raise ValueError("json-zip payload must be a non-empty list of chains")
 
-    # posteriordb format: list[chain], each chain is dict[param] -> list[draws]
+    # Chain-list JSON-zip format: list[chain], each chain is dict[param] -> list[draws]
     chains = payload
     params = sorted(chains[0].keys())
     n_draws = len(next(iter(chains[0].values())))

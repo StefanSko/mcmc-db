@@ -2,7 +2,7 @@
 
 ## Purpose
 
-A standalone tool providing reference MCMC draws for validating Bayesian inference libraries. Ships pre-computed reference posteriors (from posteriordb + CmdStan) in an efficient columnar format, with both a CLI and Python API for querying, comparing, and debugging.
+A standalone tool providing reference MCMC draws for validating Bayesian inference libraries. Ships pre-computed reference posteriors (from mcmc-db pipelines + CmdStan) in an efficient columnar format, with both a CLI and Python API for querying, comparing, and debugging.
 
 **Primary use case**: A Bayesian library (e.g., jaxstan, PyMC, numpyro) includes `mcmc-ref` as a test dependency, runs its sampler on known models, and validates results against the reference draws.
 
@@ -55,7 +55,7 @@ One file per model: `{model_name}.meta.json`
     "ess_tail": {"mu": 9701, "tau": 8956},
     "divergences_per_chain": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   },
-  "source": "posteriordb",
+  "source": "mcmc-db",
   "generated_date": "2025-12-17",
   "checks": {
     "ndraws_is_10k": true,
@@ -102,7 +102,7 @@ Clarify the wire formats used by `convert` and `compare --actual` to avoid guess
 
 ### JSON-zip (Reference Draws)
 
-`convert` accepts a **zipped JSON** with a minimal, documented schema (recommended for local use), and also supports posteriordb JSON-zip via an adapter.
+`convert` accepts a **zipped JSON** with a minimal, documented schema (recommended for local use).
 
 **mcmc-ref JSON-zip schema (recommended)**:
 
@@ -120,9 +120,9 @@ Clarify the wire formats used by `convert` and `compare --actual` to avoid guess
 }
 ```
 
-**posteriordb JSON-zip**:
+**Legacy chain-list JSON-zip**:
 - Supported via a converter adapter in `convert.py`.
-- The README should link to the posteriordb format and describe any required keys.
+- The README should describe required keys.
 
 ### Parquet (Draws Output)
 
@@ -333,7 +333,7 @@ Compute stats per parameter by iterating over batches and maintaining rolling su
 - `numpy` - Faster stats + `np.ndarray` return type (API falls back to Arrow / Python lists if unavailable)
 - `pandas` - Not required (prefer Arrow streaming for CLI output)
 
-**No dependency on**: cmdstanpy, posteriordb, duckdb, jax, stan (at runtime).
+**No dependency on**: cmdstanpy, duckdb, jax, stan (at runtime).
 
 ### Lightweight Diagnostics Module
 
@@ -357,7 +357,7 @@ Initial set, converted from jaxstanv3 reference draws:
 
 | Model | Parameters | Source |
 |-------|-----------|--------|
-| eight_schools_data-eight_schools_centered | mu, tau, theta[1-8] | posteriordb |
+| eight_schools_data-eight_schools_centered | mu, tau, theta[1-8] | canonical reference |
 | wells_data-wells_dist | beta[1-2] | local reference |
 | GLM_Poisson_Data-GLM_Poisson_model | ~43 params | local reference |
 | GLM_Binomial_data-GLM_Binomial_model | multiple | local reference |
@@ -370,7 +370,7 @@ Initial set, converted from jaxstanv3 reference draws:
 | mesquite_logvolume_informed | beta[1-4], sigma | informed reference |
 | radon_pooled_informed | beta[0-1], sigma | informed reference |
 
-Plus any models available directly from posteriordb.
+Plus any models curated directly in mcmc-db.
 
 ## Workflow: Adding a New Model
 
@@ -378,8 +378,8 @@ Documented in README (not built into the tool as a complex command):
 
 1. Write/obtain a Stan model and data
 2. Check priors: if the model uses extremely flat priors, re-draw with informed priors per Stan's prior-choice recommendations.
-3. Run CmdStan with posteriordb-standard settings (10 chains, 10k warmup, 10k sampling, thin 10, seed 4711)
-4. Export draws as JSON-zip (posteriordb format) or CSV
+3. Run CmdStan with mcmc-db standard settings (10 chains, 10k warmup, 10k sampling, thin 10, seed 4711)
+4. Export draws as JSON-zip (chain-list format) or CSV
 5. Run `mcmc-ref convert <file> --name my_model`
 6. Verify: `mcmc-ref stats my_model`
 7. Optionally commit the parquet file to your repo or share it

@@ -1,0 +1,10 @@
+{
+  "parameters": [
+    {
+      "name": "alpha",
+      "shape": [
+        8
+      ]
+    }
+  ]
+}

@@ -31,6 +31,12 @@ Provide a minimal, consistent workflow for contributors and coding agents.
 - `uv run pytest`
 
 ## Clean Release Workflow (mcmc-db)
+- Short guardrails (must do first):
+  - `git fetch origin` and branch from `origin/main` (not stale local `main`).
+  - Never lower versions: next release must be `> latest tag` and `> origin/main` version.
+  - Before cutting release, verify branch relation:
+    - `git rev-list --left-right --count origin/main...HEAD` should show only commits on `HEAD`.
+  - If `release/vX.Y.Z` already exists on remote, continue that branch; do not start a parallel release line.
 - Always release from a dedicated branch: `release/vX.Y.Z`.
 - Keep versions aligned in all release-critical files before publishing:
   - Root `pyproject.toml`: `project.version = "X.Y.Z"`

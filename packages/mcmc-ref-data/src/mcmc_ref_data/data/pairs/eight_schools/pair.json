@@ -1,0 +1,13 @@
+{
+  "bad_variant": "centered",
+  "description": "Eight Schools hierarchical model.",
+  "difficulty": "easy-medium",
+  "expected_pathologies": [
+    "divergences",
+    "high_rhat",
+    "low_ess"
+  ],
+  "good_variant": "noncentered",
+  "name": "eight_schools",
+  "reference_model": "eight_schools-noncentered"
+}

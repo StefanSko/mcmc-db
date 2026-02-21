@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    {
+      "name": "mu"
+    },
+    {
+      "name": "tau"
+    },
+    {
+      "name": "theta",
+      "shape": [
+        8
+      ]
+    }
+  ]
+}

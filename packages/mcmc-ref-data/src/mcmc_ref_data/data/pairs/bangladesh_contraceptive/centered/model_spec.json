@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    {
+      "name": "a",
+      "shape": [
+        12
+      ]
+    },
+    {
+      "name": "b",
+      "shape": [
+        12
+      ]
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "bad_variant": "centered",
+  "description": "Hierarchical linear regression pair.",
+  "difficulty": "medium",
+  "expected_pathologies": [
+    "divergences",
+    "high_rhat",
+    "low_ess"
+  ],
+  "good_variant": "noncentered",
+  "name": "hierarchical_lr",
+  "reference_model": "hierarchical_lr-noncentered"
+}

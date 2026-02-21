@@ -32,7 +32,7 @@ import click
 @click.option(
     "--informed-stan-dir",
     type=click.Path(path_type=Path),
-    default=Path("/tmp/jaxstanv3/tests/posteriordb/informed_references/stan_models"),
+    default=Path("generated_references/informed/stan_models"),
     show_default=True,
     help="Directory containing *_informed.stan files.",
 )

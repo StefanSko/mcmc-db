@@ -1,0 +1,16 @@
+{
+  "parameters": [
+    {
+      "name": "a_raw",
+      "shape": [
+        12
+      ]
+    },
+    {
+      "name": "b_raw",
+      "shape": [
+        12
+      ]
+    }
+  ]
+}

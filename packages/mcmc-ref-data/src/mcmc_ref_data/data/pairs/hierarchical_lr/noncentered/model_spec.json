@@ -1,0 +1,10 @@
+{
+  "parameters": [
+    {
+      "name": "alpha_raw",
+      "shape": [
+        8
+      ]
+    }
+  ]
+}
