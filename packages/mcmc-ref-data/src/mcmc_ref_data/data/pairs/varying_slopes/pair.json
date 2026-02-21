@@ -1,0 +1,13 @@
+{
+  "bad_variant": "centered",
+  "description": "Varying slopes pair with correlated random effects.",
+  "difficulty": "hard",
+  "expected_pathologies": [
+    "divergences",
+    "high_rhat",
+    "low_ess"
+  ],
+  "good_variant": "noncentered",
+  "name": "varying_slopes",
+  "reference_model": "varying_slopes-noncentered"
+}

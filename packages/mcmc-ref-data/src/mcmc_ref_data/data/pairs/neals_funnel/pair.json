@@ -1,0 +1,13 @@
+{
+  "bad_variant": "centered",
+  "description": "Neal's funnel geometry pair.",
+  "difficulty": "easy",
+  "expected_pathologies": [
+    "divergences",
+    "high_rhat",
+    "low_ess"
+  ],
+  "good_variant": "noncentered",
+  "name": "neals_funnel",
+  "reference_model": "neals_funnel-noncentered"
+}

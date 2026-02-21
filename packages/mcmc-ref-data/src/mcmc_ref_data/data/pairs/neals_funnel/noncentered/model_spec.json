@@ -1,0 +1,27 @@
+{
+  "data": [
+    {
+      "name": "N",
+      "type": "int"
+    }
+  ],
+  "parameters": [
+    {
+      "name": "v"
+    },
+    {
+      "name": "x_raw",
+      "shape": [
+        9
+      ]
+    }
+  ],
+  "transformed_parameters": [
+    {
+      "name": "x",
+      "shape": [
+        9
+      ]
+    }
+  ]
+}

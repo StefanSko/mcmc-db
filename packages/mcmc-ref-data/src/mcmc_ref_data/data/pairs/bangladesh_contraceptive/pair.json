@@ -1,0 +1,13 @@
+{
+  "bad_variant": "centered",
+  "description": "Hierarchical contraceptive logistic regression pair.",
+  "difficulty": "hard",
+  "expected_pathologies": [
+    "divergences",
+    "high_rhat",
+    "low_ess"
+  ],
+  "good_variant": "noncentered",
+  "name": "bangladesh_contraceptive",
+  "reference_model": "bangladesh_contraceptive-noncentered"
+}

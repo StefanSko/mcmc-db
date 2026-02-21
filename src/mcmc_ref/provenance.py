@@ -223,22 +223,22 @@ parameters {
   real beta;
   real<lower=0> lambda;
   real<lower=0> sigma;
-  real<lower=0> tau;
+  real tau;
 }
 transformed parameters {
   array[N] real mu;
   for (n in 1:N) {
-    mu[n] = U3 * (1 - exp(-exp(alpha) * (x[n] - beta)));
+    mu[n] = U3 - alpha * exp(-lambda * x[n]) + beta;
   }
 }
 model {
-  U3 ~ lognormal(2, 0.5);
-  alpha ~ normal(-2, 1);
-  beta ~ normal(0, 2);
-  lambda ~ gamma(2, 1);
-  tau ~ exponential(lambda);
-  sigma ~ normal(0, 1);
-  y ~ normal(mu, sigma + 0.01 * tau);
+  U3 ~ lognormal(2, 0.3);
+  alpha ~ normal(3.0, 1.0);
+  beta ~ normal(0.0, 1.0);
+  lambda ~ lognormal(-2.0, 0.4);
+  tau ~ normal(alpha, 0.5);
+  sigma ~ lognormal(-2.0, 0.3);
+  y ~ normal(mu, sigma + 0.05 * abs(tau));
 }
 """,
         stan_data={"N": n, "x": x, "y": y},
@@ -284,17 +284,13 @@ parameters {
   real beta_1;
   real<lower=0> sigma;
 }
-transformed parameters {
-  array[N] real mu;
-  for (n in 1:N) {
-    mu[n] = beta_0 + beta_1 * floor_measure[n];
-  }
-}
 model {
   beta_0 ~ normal(0, 2);
   beta_1 ~ normal(0, 1);
-  sigma ~ normal(0, 1);
-  log_radon ~ normal(mu, sigma);
+  sigma ~ lognormal(-1, 0.5);
+  for (n in 1:N) {
+    log_radon[n] ~ normal(beta_0 + beta_1 * floor_measure[n], sigma);
+  }
 }
 """,
         stan_data=_radon_pooled_data(),
@@ -328,7 +324,7 @@ parameters {
 model {
   beta_0 ~ normal(0, 0.5);
   beta_1 ~ normal(0, 0.5);
-  sigma ~ normal(0, 0.5);
+  sigma ~ lognormal(-1, 0.4);
   for (n in 1:N) {
     y_std[n] ~ normal(beta_0 + beta_1 * floor_measure[n], sigma);
   }

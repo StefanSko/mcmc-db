@@ -1,0 +1,11 @@
+{
+  "parameters": [
+    {
+      "name": "beta_group",
+      "shape": [
+        10,
+        2
+      ]
+    }
+  ]
+}

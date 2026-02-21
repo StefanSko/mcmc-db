@@ -10,7 +10,7 @@ class NumpyBackend:
 
     def __init__(self) -> None:
         try:
-            import numpy  # noqa: F401  # type: ignore[unresolved-import]
+            import numpy  # noqa: F401
         except Exception as exc:  # pragma: no cover - import guard
             raise ImportError("numpy is required for the numpy backend") from exc
 
@@ -21,7 +21,7 @@ class NumpyBackend:
         quantiles: Iterable[float] = (0.05, 0.5, 0.95),
         quantile_mode: str = "exact",
     ):
-        import numpy as np  # type: ignore[unresolved-import]
+        import numpy as np
 
         if hasattr(table, "read_all"):
             table = table.read_all()
