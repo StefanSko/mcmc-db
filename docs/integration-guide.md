@@ -104,16 +104,6 @@ Copies:
 - scaffolded `pairs/*`
 - `provenance_manifest.json`
 
-## Legacy Commands (deprecated)
-
-These remain for short-term compatibility only:
-
-- `mcmc-ref-build-references`
-- `mcmc-ref-import-informed`
-- `scripts/sync_stan_models.py`
-
-Prefer the provenance pipeline for all new work.
-
 ## CI/Release Gates
 
 Run before release:
