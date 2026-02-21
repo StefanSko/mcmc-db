@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pyarrow as pa
@@ -9,7 +10,7 @@ from click.testing import CliRunner
 from mcmc_ref.cli import main
 
 
-def _write_parquet(path: Path) -> None:
+def _write_draws_parquet(path: Path) -> None:
     table = pa.table(
         {
             "chain": pa.array([0, 0, 1, 1, 2, 2, 3, 3], type=pa.int32()),
@@ -25,10 +26,9 @@ def test_cli_list(tmp_path: Path, monkeypatch) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
-    # Force CLI to use a temp local store
     monkeypatch.setenv("MCMC_REF_LOCAL_ROOT", str(tmp_path))
 
     runner = CliRunner()
@@ -43,7 +43,7 @@ def test_cli_stats_include_diagnostics(tmp_path: Path, monkeypatch) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
     monkeypatch.setenv("MCMC_REF_LOCAL_ROOT", str(tmp_path))
@@ -71,7 +71,7 @@ def test_cli_compare_passes(tmp_path: Path, monkeypatch) -> None:
     meta_dir = tmp_path / "meta"
     draws_dir.mkdir()
     meta_dir.mkdir()
-    _write_parquet(draws_dir / "example.draws.parquet")
+    _write_draws_parquet(draws_dir / "example.draws.parquet")
     (meta_dir / "example.meta.json").write_text("{}")
 
     actual_csv = tmp_path / "actual.csv"
@@ -84,6 +84,35 @@ def test_cli_compare_passes(tmp_path: Path, monkeypatch) -> None:
 
     assert result.exit_code == 0
     assert "passed" in result.output
+
+
+def test_cli_data(tmp_path: Path, monkeypatch) -> None:
+    stan_data_dir = tmp_path / "stan_data"
+    stan_data_dir.mkdir()
+    (stan_data_dir / "example.data.json").write_text('{"N": 10, "x": [1, 2, 3]}')
+
+    monkeypatch.setenv("MCMC_REF_LOCAL_ROOT", str(tmp_path))
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["data", "example"])
+
+    assert result.exit_code == 0
+    data = json.loads(result.output)
+    assert data == {"N": 10, "x": [1, 2, 3]}
+
+
+def test_cli_model_code(tmp_path: Path, monkeypatch) -> None:
+    stan_code_dir = tmp_path / "stan_code"
+    stan_code_dir.mkdir()
+    (stan_code_dir / "example.stan").write_text("data { int N; }")
+
+    monkeypatch.setenv("MCMC_REF_LOCAL_ROOT", str(tmp_path))
+
+    runner = CliRunner()
+    result = runner.invoke(main, ["model-code", "example"])
+
+    assert result.exit_code == 0
+    assert "data { int N; }" in result.output
 
 
 def test_cli_provenance_scaffold(tmp_path: Path) -> None:

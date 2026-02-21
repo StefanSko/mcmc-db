@@ -1,0 +1,521 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 9635.2224334739,
+      "ess_tail": 10000.0,
+      "rhat": 1.000246228963572
+    },
+    "beta1": {
+      "ess_bulk": 9433.329552447964,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000240898320398
+    },
+    "beta2": {
+      "ess_bulk": 9826.207152287223,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002038121477654
+    },
+    "beta3": {
+      "ess_bulk": 9349.88877297624,
+      "ess_tail": 10000.0,
+      "rhat": 0.999903566173758
+    },
+    "lambda[10]": {
+      "ess_bulk": 9827.532854082443,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002830834585932
+    },
+    "lambda[11]": {
+      "ess_bulk": 9774.160424095133,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002806505614945
+    },
+    "lambda[12]": {
+      "ess_bulk": 9739.189340785759,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003865617787366
+    },
+    "lambda[13]": {
+      "ess_bulk": 9719.3617445981,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002683744410072
+    },
+    "lambda[14]": {
+      "ess_bulk": 9694.110283481652,
+      "ess_tail": 10000.0,
+      "rhat": 1.000051432194073
+    },
+    "lambda[15]": {
+      "ess_bulk": 9667.944804406974,
+      "ess_tail": 10000.0,
+      "rhat": 1.000021726073928
+    },
+    "lambda[16]": {
+      "ess_bulk": 9650.258158787154,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999975391114324
+    },
+    "lambda[17]": {
+      "ess_bulk": 9635.654992363947,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999879700817293
+    },
+    "lambda[18]": {
+      "ess_bulk": 9628.960165104829,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999697923479962
+    },
+    "lambda[19]": {
+      "ess_bulk": 9628.855122759362,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001526151411748
+    },
+    "lambda[1]": {
+      "ess_bulk": 9971.264929019178,
+      "ess_tail": 10000.0,
+      "rhat": 0.999928329046384
+    },
+    "lambda[20]": {
+      "ess_bulk": 9631.704741210975,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002933521223714
+    },
+    "lambda[21]": {
+      "ess_bulk": 9638.127863763213,
+      "ess_tail": 10000.0,
+      "rhat": 1.000330083936558
+    },
+    "lambda[22]": {
+      "ess_bulk": 9650.663910451378,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004731953442696
+    },
+    "lambda[23]": {
+      "ess_bulk": 9665.618843925553,
+      "ess_tail": 9685.88004120668,
+      "rhat": 1.000403434544887
+    },
+    "lambda[24]": {
+      "ess_bulk": 9539.46687198517,
+      "ess_tail": 9721.320957165111,
+      "rhat": 1.000130888599536
+    },
+    "lambda[25]": {
+      "ess_bulk": 9399.202297330248,
+      "ess_tail": 9829.772450616374,
+      "rhat": 1.0002020224600254
+    },
+    "lambda[26]": {
+      "ess_bulk": 9278.181320074595,
+      "ess_tail": 9468.737190665504,
+      "rhat": 1.0001690925860085
+    },
+    "lambda[27]": {
+      "ess_bulk": 9174.957497705496,
+      "ess_tail": 9622.393565104969,
+      "rhat": 1.0000981630886603
+    },
+    "lambda[28]": {
+      "ess_bulk": 9102.153202714324,
+      "ess_tail": 9871.030933746877,
+      "rhat": 1.0000805895316214
+    },
+    "lambda[29]": {
+      "ess_bulk": 9056.74847503063,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000109365748864
+    },
+    "lambda[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999603072515761
+    },
+    "lambda[30]": {
+      "ess_bulk": 9052.814666905171,
+      "ess_tail": 10000.0,
+      "rhat": 1.000144849489356
+    },
+    "lambda[31]": {
+      "ess_bulk": 9076.291815717424,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004726605340564
+    },
+    "lambda[32]": {
+      "ess_bulk": 9134.569746951918,
+      "ess_tail": 9993.962280493264,
+      "rhat": 1.000620777046119
+    },
+    "lambda[33]": {
+      "ess_bulk": 9250.558308673604,
+      "ess_tail": 10000.0,
+      "rhat": 1.000715442413662
+    },
+    "lambda[34]": {
+      "ess_bulk": 9448.706502658315,
+      "ess_tail": 9965.726725121749,
+      "rhat": 1.000808597749728
+    },
+    "lambda[35]": {
+      "ess_bulk": 9857.318557347553,
+      "ess_tail": 9955.91377144628,
+      "rhat": 1.0005820692764271
+    },
+    "lambda[36]": {
+      "ess_bulk": 9937.412905030536,
+      "ess_tail": 10000.0,
+      "rhat": 1.000464170404264
+    },
+    "lambda[37]": {
+      "ess_bulk": 9983.185345533031,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000975886077939
+    },
+    "lambda[38]": {
+      "ess_bulk": 9970.608463218903,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003125544931915
+    },
+    "lambda[39]": {
+      "ess_bulk": 9896.43988005393,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003397000920473
+    },
+    "lambda[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000542431070694
+    },
+    "lambda[40]": {
+      "ess_bulk": 9759.938960733514,
+      "ess_tail": 10000.0,
+      "rhat": 1.000319095107098
+    },
+    "lambda[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001597022746629
+    },
+    "lambda[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002690221534611
+    },
+    "lambda[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9996.572520601447,
+      "rhat": 1.0003467157803918
+    },
+    "lambda[7]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003964307526005
+    },
+    "lambda[8]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003912011733571
+    },
+    "lambda[9]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003465992819143
+    },
+    "log_lambda[10]": {
+      "ess_bulk": 9827.528419113405,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002830811303507
+    },
+    "log_lambda[11]": {
+      "ess_bulk": 9774.167840061964,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002733397447288
+    },
+    "log_lambda[12]": {
+      "ess_bulk": 9739.190167178125,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003770761322652
+    },
+    "log_lambda[13]": {
+      "ess_bulk": 9719.359391878017,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002586928755204
+    },
+    "log_lambda[14]": {
+      "ess_bulk": 9694.105771253593,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000514293619271
+    },
+    "log_lambda[15]": {
+      "ess_bulk": 9667.948672669245,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000217268135927
+    },
+    "log_lambda[16]": {
+      "ess_bulk": 9650.257501234393,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999975371540443
+    },
+    "log_lambda[17]": {
+      "ess_bulk": 9635.650604794513,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999943600685189
+    },
+    "log_lambda[18]": {
+      "ess_bulk": 9628.962060366131,
+      "ess_tail": 10000.0,
+      "rhat": 0.99996978965109
+    },
+    "log_lambda[19]": {
+      "ess_bulk": 9628.851932582373,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001501326273616
+    },
+    "log_lambda[1]": {
+      "ess_bulk": 9971.265185926823,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000048750294128
+    },
+    "log_lambda[20]": {
+      "ess_bulk": 9631.704804372168,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002867654761285
+    },
+    "log_lambda[21]": {
+      "ess_bulk": 9638.144401528183,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003201174890404
+    },
+    "log_lambda[22]": {
+      "ess_bulk": 9650.66265884909,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004620068695025
+    },
+    "log_lambda[23]": {
+      "ess_bulk": 9665.622871866848,
+      "ess_tail": 9712.456644784654,
+      "rhat": 1.0004026065351412
+    },
+    "log_lambda[24]": {
+      "ess_bulk": 9539.473350215307,
+      "ess_tail": 9734.964669383911,
+      "rhat": 1.0001300443532832
+    },
+    "log_lambda[25]": {
+      "ess_bulk": 9399.205757561054,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002037738247904
+    },
+    "log_lambda[26]": {
+      "ess_bulk": 9278.179682992202,
+      "ess_tail": 9485.748071356638,
+      "rhat": 1.0001747288340164
+    },
+    "log_lambda[27]": {
+      "ess_bulk": 9174.964432410858,
+      "ess_tail": 9637.427944826934,
+      "rhat": 1.0000996778777171
+    },
+    "log_lambda[28]": {
+      "ess_bulk": 9102.14589478514,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000885176841612
+    },
+    "log_lambda[29]": {
+      "ess_bulk": 9056.748837430734,
+      "ess_tail": 10000.0,
+      "rhat": 1.000017746068986
+    },
+    "log_lambda[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999603059521496
+    },
+    "log_lambda[30]": {
+      "ess_bulk": 9052.818910260137,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001581490429614
+    },
+    "log_lambda[31]": {
+      "ess_bulk": 9076.288480517602,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004840383860183
+    },
+    "log_lambda[32]": {
+      "ess_bulk": 9134.57456892484,
+      "ess_tail": 9990.9804030306,
+      "rhat": 1.000632029517469
+    },
+    "log_lambda[33]": {
+      "ess_bulk": 9250.559909285226,
+      "ess_tail": 10000.0,
+      "rhat": 1.0007244449652666
+    },
+    "log_lambda[34]": {
+      "ess_bulk": 9448.702318265503,
+      "ess_tail": 9960.054026785507,
+      "rhat": 1.0008161363070343
+    },
+    "log_lambda[35]": {
+      "ess_bulk": 9857.31812329511,
+      "ess_tail": 9955.795126625158,
+      "rhat": 1.000593529188497
+    },
+    "log_lambda[36]": {
+      "ess_bulk": 9937.408882185024,
+      "ess_tail": 10000.0,
+      "rhat": 1.000488537437223
+    },
+    "log_lambda[37]": {
+      "ess_bulk": 9983.181625933572,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000990021402394
+    },
+    "log_lambda[38]": {
+      "ess_bulk": 9970.614489908929,
+      "ess_tail": 10000.0,
+      "rhat": 1.000334272892773
+    },
+    "log_lambda[39]": {
+      "ess_bulk": 9897.01890884763,
+      "ess_tail": 10000.0,
+      "rhat": 1.000339933257263
+    },
+    "log_lambda[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000093213704199
+    },
+    "log_lambda[40]": {
+      "ess_bulk": 9759.932535647235,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003190952335144
+    },
+    "log_lambda[4]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0001597109907954
+    },
+    "log_lambda[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0002690266302177
+    },
+    "log_lambda[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003467139451327
+    },
+    "log_lambda[7]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003964223482122
+    },
+    "log_lambda[8]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.000391193510447
+    },
+    "log_lambda[9]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.00034660536941
+    }
+  },
+  "generated_date": "2026-02-14",
+  "model": "GLM_Poisson_Data-GLM_Poisson_model",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "beta1",
+    "beta2",
+    "beta3",
+    "log_lambda[1]",
+    "log_lambda[2]",
+    "log_lambda[3]",
+    "log_lambda[4]",
+    "log_lambda[5]",
+    "log_lambda[6]",
+    "log_lambda[7]",
+    "log_lambda[8]",
+    "log_lambda[9]",
+    "log_lambda[10]",
+    "log_lambda[11]",
+    "log_lambda[12]",
+    "log_lambda[13]",
+    "log_lambda[14]",
+    "log_lambda[15]",
+    "log_lambda[16]",
+    "log_lambda[17]",
+    "log_lambda[18]",
+    "log_lambda[19]",
+    "log_lambda[20]",
+    "log_lambda[21]",
+    "log_lambda[22]",
+    "log_lambda[23]",
+    "log_lambda[24]",
+    "log_lambda[25]",
+    "log_lambda[26]",
+    "log_lambda[27]",
+    "log_lambda[28]",
+    "log_lambda[29]",
+    "log_lambda[30]",
+    "log_lambda[31]",
+    "log_lambda[32]",
+    "log_lambda[33]",
+    "log_lambda[34]",
+    "log_lambda[35]",
+    "log_lambda[36]",
+    "log_lambda[37]",
+    "log_lambda[38]",
+    "log_lambda[39]",
+    "log_lambda[40]",
+    "lambda[1]",
+    "lambda[2]",
+    "lambda[3]",
+    "lambda[4]",
+    "lambda[5]",
+    "lambda[6]",
+    "lambda[7]",
+    "lambda[8]",
+    "lambda[9]",
+    "lambda[10]",
+    "lambda[11]",
+    "lambda[12]",
+    "lambda[13]",
+    "lambda[14]",
+    "lambda[15]",
+    "lambda[16]",
+    "lambda[17]",
+    "lambda[18]",
+    "lambda[19]",
+    "lambda[20]",
+    "lambda[21]",
+    "lambda[22]",
+    "lambda[23]",
+    "lambda[24]",
+    "lambda[25]",
+    "lambda[26]",
+    "lambda[27]",
+    "lambda[28]",
+    "lambda[29]",
+    "lambda[30]",
+    "lambda[31]",
+    "lambda[32]",
+    "lambda[33]",
+    "lambda[34]",
+    "lambda[35]",
+    "lambda[36]",
+    "lambda[37]",
+    "lambda[38]",
+    "lambda[39]",
+    "lambda[40]"
+  ],
+  "source": "converted"
+}

@@ -7,6 +7,7 @@ from collections.abc import Mapping, Sequence
 from . import diagnostics
 from .backends import get_backend
 from .compare import compare_stats, compute_stats_from_draws
+from .convert import _chains_from_table
 from .draws import Draws, coerce_return
 from .store import DataStore
 
@@ -14,6 +15,16 @@ from .store import DataStore
 def list_models(store: DataStore | None = None) -> list[str]:
     store = store or DataStore()
     return store.list_models()
+
+
+def stan_data(model: str, store: DataStore | None = None) -> dict:
+    store = store or DataStore()
+    return store.read_stan_data(model)
+
+
+def model_code(model: str, store: DataStore | None = None) -> str:
+    store = store or DataStore()
+    return store.read_stan_code(model)
 
 
 def stats(
@@ -109,17 +120,3 @@ def compare(
     ref_stats = stats(model, params=list(actual.keys()), backend=backend, store=store)
     actual_stats = compute_stats_from_draws(actual)
     return compare_stats(ref_stats, actual_stats, tolerance=tolerance, metrics=metrics)
-
-
-def _chains_from_table(table, param: str) -> list[list[float]]:
-    chain_col = table.column("chain").to_pylist()
-    draw_col = table.column("draw").to_pylist()
-    param_col = table.column(param).to_pylist()
-    buckets: dict[int, list[tuple[int, float]]] = {}
-    for chain, draw, val in zip(chain_col, draw_col, param_col, strict=False):
-        buckets.setdefault(int(chain), []).append((int(draw), float(val)))
-    chains: list[list[float]] = []
-    for chain in sorted(buckets):
-        ordered = sorted(buckets[chain], key=lambda x: x[0])
-        chains.append([v for _, v in ordered])
-    return chains

@@ -1,0 +1,47 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "mu[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9393.30702763756,
+      "rhat": 0.9997733394670004
+    },
+    "mu[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003147261021046
+    },
+    "sigma[1]": {
+      "ess_bulk": 9894.387914529105,
+      "ess_tail": 9671.059983344141,
+      "rhat": 0.9997881673412627
+    },
+    "sigma[2]": {
+      "ess_bulk": 9473.439573308218,
+      "ess_tail": 9816.393695756462,
+      "rhat": 1.0002950527239995
+    },
+    "theta": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003270599444976
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "low_dim_gauss_mix-low_dim_gauss_mix",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "mu[1]",
+    "mu[2]",
+    "sigma[1]",
+    "sigma[2]",
+    "theta"
+  ],
+  "source": "converted"
+}

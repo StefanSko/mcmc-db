@@ -12,6 +12,7 @@ import pyarrow.parquet as pq
 
 from . import convert as convert_mod
 from . import generate as generate_mod
+from . import pairs as pairs_mod
 from . import provenance, reference
 from .store import DataStore
 
@@ -35,6 +36,20 @@ def list_cmd(format_: str) -> None:
         return
     for model in models:
         click.echo(model)
+
+
+@main.command("data")
+@click.argument("model")
+def data_cmd(model: str) -> None:
+    data = reference.stan_data(model)
+    click.echo(json.dumps(data, indent=2))
+
+
+@main.command("model-code")
+@click.argument("model")
+def model_code_cmd(model: str) -> None:
+    code = reference.model_code(model)
+    click.echo(code)
 
 
 @main.command("stats")
@@ -107,11 +122,8 @@ def draws_cmd(
 
     if format_ == "parquet":
         table = draws.read_all() if hasattr(draws, "read_all") else draws
-        if output is None:
-            buf = pq.write_table(table, sys.stdout.buffer)
-            _ = buf
-        else:
-            pq.write_table(table, output)
+        dest = sys.stdout.buffer if output is None else output
+        pq.write_table(table, dest)
         return
 
 
@@ -188,6 +200,44 @@ def convert_cmd(input_path: Path, name: str, force: bool) -> None:
     click.echo(f"converted {name} -> {draws_dir}")
 
 
+@main.command("pairs")
+@click.option(
+    "--format",
+    "format_",
+    type=click.Choice(["table", "json"], case_sensitive=False),
+    default="table",
+)
+def pairs_cmd(format_: str) -> None:
+    """List all reparametrization pairs."""
+    names = pairs_mod.list_pairs()
+    if format_ == "json":
+        click.echo(json.dumps(names, indent=2))
+        return
+    for name in names:
+        click.echo(name)
+
+
+@main.command("pair")
+@click.argument("name")
+def pair_cmd(name: str) -> None:
+    """Show info about a reparametrization pair."""
+    try:
+        p = pairs_mod.pair(name)
+    except FileNotFoundError as exc:
+        click.echo(f"pair not found: {name}", err=True)
+        raise SystemExit(1) from exc
+    info = {
+        "name": p.name,
+        "description": p.description,
+        "bad_variant": p.bad_variant,
+        "good_variant": p.good_variant,
+        "reference_model": p.reference_model,
+        "expected_pathologies": p.expected_pathologies,
+        "difficulty": p.difficulty,
+    }
+    click.echo(json.dumps(info, indent=2))
+
+
 @main.command("provenance-scaffold")
 @click.option("--output-root", type=click.Path(path_type=Path), required=True)
 def provenance_scaffold_cmd(output_root: Path) -> None:
@@ -243,11 +293,8 @@ def provenance_publish_cmd(source_root: Path, scaffold_root: Path, package_root:
 
 def _read_actual_csv(path: Path) -> dict[str, list[float]]:
     table = pacsv.read_csv(path)
-    cols = [c for c in table.column_names if c not in {"chain", "draw"}]
-    actual: dict[str, list[float]] = {}
-    for param in cols:
-        actual[param] = [float(v) for v in table.column(param).to_pylist()]
-    return actual
+    params = [c for c in table.column_names if c not in {"chain", "draw"}]
+    return {p: [float(v) for v in table.column(p).to_pylist()] for p in params}
 
 
 def _metric_headers(stats: dict[str, dict[str, float]]) -> list[str]:

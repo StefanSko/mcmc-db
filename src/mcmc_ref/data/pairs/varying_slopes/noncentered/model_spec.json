@@ -1,0 +1,27 @@
+{
+  "parameters": [
+    {"name": "mu", "shape": [2], "constraint": "real"},
+    {"name": "sigma", "shape": [2], "constraint": "lower=0"},
+    {"name": "L_Rho", "shape": [2, 2], "constraint": "cholesky_factor_corr"},
+    {"name": "z_raw", "shape": [8, 2], "constraint": "real"},
+    {"name": "sigma_y", "shape": [], "constraint": "lower=0"}
+  ],
+  "transformed_parameters": [
+    {"name": "z", "shape": [8, 2], "expression": "mu + (diag_pre_multiply(sigma, L_Rho) * z_raw')'"}
+  ],
+  "data": [
+    {"name": "N", "type": "int"},
+    {"name": "K", "type": "int"},
+    {"name": "group", "type": "int", "shape": ["N"]},
+    {"name": "x", "type": "real", "shape": ["N"]},
+    {"name": "y", "type": "real", "shape": ["N"]}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "mu", "mean": 0, "sd": 5},
+    {"type": "half_normal", "variate": "sigma", "sd": 5},
+    {"type": "lkj_corr_cholesky", "variate": "L_Rho", "eta": 2},
+    {"type": "normal", "variate": "z_raw", "mean": 0, "sd": 1},
+    {"type": "half_normal", "variate": "sigma_y", "sd": 5},
+    {"type": "normal", "variate": "y", "mean": "z[group, 1] + z[group, 2] .* x", "sd": "sigma_y"}
+  ]
+}

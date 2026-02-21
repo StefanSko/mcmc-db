@@ -1,0 +1,80 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9584.529710848581,
+      "rhat": 0.9998478042290196
+    },
+    "beta[2]": {
+      "ess_bulk": 9938.369315507884,
+      "ess_tail": 9746.19799540867,
+      "rhat": 1.0004780012110341
+    },
+    "sigma": {
+      "ess_bulk": 9687.479555743535,
+      "ess_tail": 10000.0,
+      "rhat": 1.0003432177090996
+    }
+  },
+  "generated_date": "2026-02-09",
+  "informed_reference_info": {
+    "added_by": "jaxstan informed-prior reference generator",
+    "added_date": "2026-01-08",
+    "checks_made": {
+      "ess_above_400": true,
+      "nchains_is_gte_4": true,
+      "ndraws_is_10k": true,
+      "rhat_below_1_01": true
+    },
+    "diagnostics": {
+      "max_rhat": 1.00048,
+      "min_ess": 9711.8,
+      "nchains": 10,
+      "ndraws": 10000
+    },
+    "inference": {
+      "method": "stan_sampling",
+      "method_arguments": {
+        "chains": 10,
+        "iter": 20000,
+        "seed": 4711,
+        "thin": 10,
+        "warmup": 10000
+      }
+    },
+    "name": "mesquite_logvolume_informed",
+    "standardization": {
+      "log_canopy_volume": {
+        "mean": 1.0380805866012444,
+        "std": 1.1183705367548653
+      },
+      "log_weight": {
+        "mean": 5.919542765228073,
+        "std": 0.9036901001878707
+      }
+    },
+    "versions": {
+      "cmdstan_version": [
+        2,
+        37
+      ],
+      "cmdstanpy_version": "1.3.0"
+    }
+  },
+  "model": "mesquite_logvolume_informed",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "sigma"
+  ],
+  "reference_variant": "informed_prior",
+  "source": "converted"
+}

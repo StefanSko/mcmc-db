@@ -1,0 +1,113 @@
+{
+  "model": "hierarchical_lr-noncentered",
+  "parameters": [
+    "mu_alpha",
+    "sigma_alpha",
+    "alpha_raw.1",
+    "alpha_raw.2",
+    "alpha_raw.3",
+    "alpha_raw.4",
+    "alpha_raw.5",
+    "alpha_raw.6",
+    "beta",
+    "sigma_y",
+    "alpha.1",
+    "alpha.2",
+    "alpha.3",
+    "alpha.4",
+    "alpha.5",
+    "alpha.6"
+  ],
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "diagnostics": {
+    "mu_alpha": {
+      "rhat": 1.0061,
+      "ess_bulk": 1370.5,
+      "ess_tail": 2108.9
+    },
+    "sigma_alpha": {
+      "rhat": 1.0034,
+      "ess_bulk": 1822.1,
+      "ess_tail": 4112.9
+    },
+    "alpha_raw.1": {
+      "rhat": 1.0053,
+      "ess_bulk": 1451.2,
+      "ess_tail": 2470.3
+    },
+    "alpha_raw.2": {
+      "rhat": 1.006,
+      "ess_bulk": 1433.1,
+      "ess_tail": 2598.7
+    },
+    "alpha_raw.3": {
+      "rhat": 1.0073,
+      "ess_bulk": 1558.2,
+      "ess_tail": 2496.6
+    },
+    "alpha_raw.4": {
+      "rhat": 1.0048,
+      "ess_bulk": 2399.0,
+      "ess_tail": 4661.0
+    },
+    "alpha_raw.5": {
+      "rhat": 1.0038,
+      "ess_bulk": 2972.1,
+      "ess_tail": 4142.1
+    },
+    "alpha_raw.6": {
+      "rhat": 1.0009,
+      "ess_bulk": 3939.1,
+      "ess_tail": 4645.0
+    },
+    "beta": {
+      "rhat": 1.0003,
+      "ess_bulk": 5571.4,
+      "ess_tail": 4709.5
+    },
+    "sigma_y": {
+      "rhat": 1.0011,
+      "ess_bulk": 6335.1,
+      "ess_tail": 4797.9
+    },
+    "alpha.1": {
+      "rhat": 1.0003,
+      "ess_bulk": 10000.0,
+      "ess_tail": 6340.1
+    },
+    "alpha.2": {
+      "rhat": 1.0016,
+      "ess_bulk": 10000.0,
+      "ess_tail": 6890.0
+    },
+    "alpha.3": {
+      "rhat": 1.0008,
+      "ess_bulk": 10000.0,
+      "ess_tail": 6295.7
+    },
+    "alpha.4": {
+      "rhat": 1.0019,
+      "ess_bulk": 4270.3,
+      "ess_tail": 3866.1
+    },
+    "alpha.5": {
+      "rhat": 1.001,
+      "ess_bulk": 10000.0,
+      "ess_tail": 5436.7
+    },
+    "alpha.6": {
+      "rhat": 1.0007,
+      "ess_bulk": 3352.8,
+      "ess_tail": 4925.6
+    }
+  },
+  "generated_date": "2026-02-11",
+  "checks": {
+    "ndraws_is_10k": true,
+    "nchains_is_gte_4": true,
+    "ess_above_400": true,
+    "rhat_below_1_01": true
+  },
+  "source": "cmdstan-2.37.0"
+}

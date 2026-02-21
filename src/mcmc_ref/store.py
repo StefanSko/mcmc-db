@@ -54,6 +54,32 @@ class DataStore:
         path = self.resolve_meta_path(model)
         return json.loads(path.read_text())
 
+    def resolve_stan_data_path(self, model: str) -> Path:
+        local = self._resolve_in_root(self._local, model, "stan_data", ".data.json")
+        if local is not None:
+            return local
+        packaged = self._resolve_in_root(self._packaged, model, "stan_data", ".data.json")
+        if packaged is not None:
+            return packaged
+        raise FileNotFoundError(f"stan data not found for model: {model}")
+
+    def read_stan_data(self, model: str) -> dict:
+        path = self.resolve_stan_data_path(model)
+        return json.loads(path.read_text())
+
+    def resolve_stan_code_path(self, model: str) -> Path:
+        local = self._resolve_stan_code_in_root(self._local, model)
+        if local is not None:
+            return local
+        packaged = self._resolve_stan_code_in_root(self._packaged, model)
+        if packaged is not None:
+            return packaged
+        raise FileNotFoundError(f"stan code not found for model: {model}")
+
+    def read_stan_code(self, model: str) -> str:
+        path = self.resolve_stan_code_path(model)
+        return path.read_text()
+
     def open_draws(
         self,
         model: str,
@@ -82,15 +108,37 @@ class DataStore:
     ) -> Path | None:
         if root is None:
             return None
-        path = getattr(root, subdir) / f"{model}{suffix}"
+        path = root.root / subdir / f"{model}{suffix}"
         return path if path.exists() else None
+
+    def _resolve_stan_code_in_root(self, root: StorePaths | None, model: str) -> Path | None:
+        if root is None:
+            return None
+        stan_code = root.root / "stan_code" / f"{model}.stan"
+        if stan_code.exists():
+            return stan_code
+        stan_models = root.root / "stan_models" / f"{model}.stan"
+        if stan_models.exists():
+            return stan_models
+        return None
 
     def _init_root(self, root: Path | None) -> StorePaths | None:
         if root is None:
             return None
         draws = root / "draws"
         meta = root / "meta"
-        if not draws.exists() and not meta.exists():
+        pairs = root / "pairs"
+        stan_data = root / "stan_data"
+        stan_code = root / "stan_code"
+        stan_models = root / "stan_models"
+        if (
+            not draws.exists()
+            and not meta.exists()
+            and not pairs.exists()
+            and not stan_data.exists()
+            and not stan_code.exists()
+            and not stan_models.exists()
+        ):
             return None
         return StorePaths(root=root, draws=draws, meta=meta)
 
@@ -105,8 +153,17 @@ def _default_local_root() -> Path:
 def _default_packaged_root() -> Path | None:
     try:
         from importlib import resources
-
-        package = resources.files("mcmc_ref").joinpath("data")
-        return Path(str(package))
     except Exception:
         return None
+
+    # Prefer dedicated corpus package when installed.
+    for package_name in ("mcmc_ref_data", "mcmc_ref"):
+        try:
+            package_data = Path(str(resources.files(package_name).joinpath("data")))
+        except Exception:
+            continue
+        draws = package_data / "draws"
+        meta = package_data / "meta"
+        if draws.exists() or meta.exists():
+            return package_data
+    return None

@@ -1,6 +1,6 @@
 [project]
 name = "mcmc-ref"
-version = "0.1.0"
+version = "0.1.3"
 description = "Reference posterior validation tool"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -12,11 +12,18 @@ dependencies = [
 [project.optional-dependencies]
 extras = ["numpy>=1.24"]
 dev = ["pytest>=8.2", "ruff>=0.5.0", "ty>=0.0.1"]
-provenance = ["cmdstanpy>=1.2"]
+data = ["mcmc-ref-data==0.1.2"]
+generate = ["cmdstanpy>=1.2.5"]
+provenance = ["cmdstanpy>=1.2.5"]
+bootstrap = ["posteriordb>=0.2.0"]
 
 [project.scripts]
 mcmc-ref = "mcmc_ref.cli:main"
 mcmc-ref-build-references = "mcmc_ref.build_references:main"
+mcmc-ref-import-informed = "mcmc_ref.informed_references:main"
+
+[tool.uv.sources]
+mcmc-ref-data = { path = "packages/mcmc-ref-data" }
 
 [tool.ruff]
 line-length = 100

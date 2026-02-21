@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "alpha": {
+      "ess_bulk": 9472.419950770412,
+      "ess_tail": 9402.822473944612,
+      "rhat": 1.000152943177147
+    },
+    "beta": {
+      "ess_bulk": 9474.590711395773,
+      "ess_tail": 9391.237553957635,
+      "rhat": 1.0001696494987578
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004780413338492
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "kilpisjarvi_mod-kilpisjarvi",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "alpha",
+    "beta",
+    "sigma"
+  ],
+  "source": "converted"
+}

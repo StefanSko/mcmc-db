@@ -1,0 +1,18 @@
+{
+  "parameters": [
+    {"name": "mu", "shape": [], "constraint": "real"},
+    {"name": "tau", "shape": [], "constraint": "lower=0"},
+    {"name": "theta", "shape": [8], "constraint": "real"}
+  ],
+  "data": [
+    {"name": "J", "type": "int"},
+    {"name": "y", "type": "real", "shape": [8]},
+    {"name": "sigma", "type": "real", "shape": [8]}
+  ],
+  "log_density_components": [
+    {"type": "normal", "variate": "mu", "mean": 0, "sd": 5},
+    {"type": "cauchy", "variate": "tau", "location": 0, "scale": 5},
+    {"type": "normal", "variate": "theta", "mean": "mu", "sd": "tau"},
+    {"type": "normal", "variate": "y", "mean": "theta", "sd": "sigma"}
+  ]
+}

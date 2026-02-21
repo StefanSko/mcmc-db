@@ -1,0 +1,35 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "beta[1]": {
+      "ess_bulk": 9652.78071246453,
+      "ess_tail": 9737.05055297409,
+      "rhat": 0.9997658020348473
+    },
+    "beta[2]": {
+      "ess_bulk": 9909.12039066771,
+      "ess_tail": 10000.0,
+      "rhat": 0.9996883264764305
+    },
+    "sigma": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 0.9998620313229796
+    }
+  },
+  "generated_date": "2026-02-09",
+  "model": "mesquite-logmesquite_logvolume",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "beta[1]",
+    "beta[2]",
+    "sigma"
+  ],
+  "source": "converted"
+}
