@@ -73,3 +73,57 @@ def test_publish_reference_data(tmp_path: Path) -> None:
     assert (package_root / "meta" / "demo.meta.json").exists()
     assert (package_root / "pairs" / "neals_funnel" / "pair.json").exists()
     assert (package_root / "provenance_manifest.json").exists()
+
+
+def test_publish_reference_data_requires_source_dirs(tmp_path: Path) -> None:
+    scaffold_root = tmp_path / "scaffold"
+    provenance.materialize_scaffold(scaffold_root)
+
+    source_root = tmp_path / "missing_source"
+    package_root = tmp_path / "package_data"
+
+    try:
+        generate.publish_reference_data(
+            source_root=source_root,
+            scaffold_root=scaffold_root,
+            package_root=package_root,
+        )
+    except FileNotFoundError as exc:
+        assert "source draws/meta directories must exist" in str(exc)
+    else:
+        raise AssertionError("expected FileNotFoundError when source draws/meta are missing")
+
+
+def test_publish_reference_data_replaces_stale_targets(tmp_path: Path) -> None:
+    source_root = tmp_path / "source"
+    (source_root / "draws").mkdir(parents=True)
+    (source_root / "meta").mkdir(parents=True)
+    (source_root / "draws" / "fresh.draws.parquet").write_bytes(b"parquet")
+    (source_root / "meta" / "fresh.meta.json").write_text("{}")
+
+    scaffold_root = tmp_path / "scaffold"
+    provenance.materialize_scaffold(scaffold_root)
+
+    package_root = tmp_path / "package_data"
+    (package_root / "draws").mkdir(parents=True)
+    (package_root / "meta").mkdir(parents=True)
+    (package_root / "pairs" / "stale_pair").mkdir(parents=True)
+    (package_root / "draws" / "stale.draws.parquet").write_bytes(b"stale")
+    (package_root / "meta" / "stale.meta.json").write_text("{}")
+    (package_root / "pairs" / "stale_pair" / "pair.json").write_text("{}")
+    (package_root / "provenance_manifest.json").write_text('{"old": true}')
+
+    publish = generate.publish_reference_data(
+        source_root=source_root,
+        scaffold_root=scaffold_root,
+        package_root=package_root,
+    )
+
+    assert publish.draws_copied == 1
+    assert publish.meta_copied == 1
+    assert publish.pairs_copied == 5
+    assert (package_root / "draws" / "fresh.draws.parquet").exists()
+    assert (package_root / "meta" / "fresh.meta.json").exists()
+    assert not (package_root / "draws" / "stale.draws.parquet").exists()
+    assert not (package_root / "meta" / "stale.meta.json").exists()
+    assert not (package_root / "pairs" / "stale_pair").exists()

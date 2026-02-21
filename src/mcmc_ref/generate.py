@@ -110,28 +110,40 @@ def publish_reference_data(
     source_root = Path(source_root)
     scaffold_root = Path(scaffold_root)
     package_root = Path(package_root)
+    source_draws = source_root / "draws"
+    source_meta = source_root / "meta"
+    missing_sources = [path for path in (source_draws, source_meta) if not path.is_dir()]
+    if missing_sources:
+        missing = ", ".join(str(path) for path in missing_sources)
+        raise FileNotFoundError(f"source draws/meta directories must exist: {missing}")
+
+    scaffold_pairs = scaffold_root / "pairs"
+    if not scaffold_pairs.is_dir():
+        raise FileNotFoundError(f"scaffold pairs directory not found: {scaffold_pairs}")
+
+    manifest = scaffold_root / "provenance_manifest.json"
+    if not manifest.is_file():
+        raise FileNotFoundError(f"scaffold provenance manifest not found: {manifest}")
+
     draws_target = package_root / "draws"
     meta_target = package_root / "meta"
     pairs_target = package_root / "pairs"
-    draws_target.mkdir(parents=True, exist_ok=True)
-    meta_target.mkdir(parents=True, exist_ok=True)
-    pairs_target.mkdir(parents=True, exist_ok=True)
+    package_root.mkdir(parents=True, exist_ok=True)
+    _reset_dir(draws_target)
+    _reset_dir(meta_target)
+    _reset_dir(pairs_target)
 
-    draws_copied = _copy_files(source_root / "draws", draws_target, "*.draws.parquet")
-    meta_copied = _copy_files(source_root / "meta", meta_target, "*.meta.json")
+    draws_copied = _copy_files(source_draws, draws_target, "*.draws.parquet")
+    meta_copied = _copy_files(source_meta, meta_target, "*.meta.json")
 
     pairs_copied = 0
-    scaffold_pairs = scaffold_root / "pairs"
-    if scaffold_pairs.exists():
-        for pair_dir in sorted(scaffold_pairs.iterdir()):
-            if not pair_dir.is_dir():
-                continue
-            shutil.copytree(pair_dir, pairs_target / pair_dir.name, dirs_exist_ok=True)
-            pairs_copied += 1
+    for pair_dir in sorted(scaffold_pairs.iterdir()):
+        if not pair_dir.is_dir():
+            continue
+        shutil.copytree(pair_dir, pairs_target / pair_dir.name, dirs_exist_ok=True)
+        pairs_copied += 1
 
-    manifest = scaffold_root / "provenance_manifest.json"
-    if manifest.exists():
-        shutil.copy2(manifest, package_root / "provenance_manifest.json")
+    shutil.copy2(manifest, package_root / "provenance_manifest.json")
 
     return PublishResult(
         draws_copied=draws_copied,
@@ -245,3 +257,9 @@ def _copy_files(source_dir: Path, target_dir: Path, pattern: str) -> int:
         shutil.copy2(path, target_dir / path.name)
         copied += 1
     return copied
+
+
+def _reset_dir(path: Path) -> None:
+    if path.exists():
+        shutil.rmtree(path)
+    path.mkdir(parents=True, exist_ok=True)
