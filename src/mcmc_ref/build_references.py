@@ -148,7 +148,7 @@ def _extract_single_posterior(
     out_code_path.write_text(stan_path.read_text())
 
 
-@click.command("build-references")
+@click.command("build-references", deprecated=True)
 @click.option(
     "--source-dir",
     type=click.Path(path_type=Path),
@@ -174,7 +174,7 @@ def _extract_single_posterior(
     help="Allow conversion when quality checks fail (not recommended for canonical benchmarks).",
 )
 def main(source_dir: Path, output_root: Path, models: str | None, force: bool) -> None:
-    """Convert all mcmc-db draw archives to a local mcmc-ref corpus."""
+    """DEPRECATED: Convert draw archives to a local corpus; prefer provenance-* commands."""
     if not source_dir.exists():
         raise SystemExit(f"source directory not found: {source_dir}")
     model_list = models.split(",") if models else None

@@ -3,8 +3,11 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.metadata
 import json
 import math
+import os
+import subprocess
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
@@ -149,11 +152,44 @@ def _build_manifest(output_root: Path) -> dict[str, Any]:
 
     return {
         "schema_version": 1,
+        "generator": {
+            "name": "mcmc-ref",
+            "version": _generator_version(),
+            "source_commit": _source_commit(),
+        },
         "cmdstan": asdict(DEFAULT_CMDSTAN),
         "models": [recipe.name for recipe in list_model_recipes()],
         "pairs": [recipe.name for recipe in list_pair_recipes()],
         "files": files,
     }
+
+
+def _generator_version() -> str:
+    try:
+        return importlib.metadata.version("mcmc-ref")
+    except Exception:
+        return "unknown"
+
+
+def _source_commit() -> str:
+    env_commit = os.environ.get("MCMC_REF_SOURCE_COMMIT")
+    if env_commit:
+        return env_commit
+
+    try:
+        repo_root = Path(__file__).resolve().parents[2]
+        proc = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except Exception:
+        return "unknown"
+
+    commit = proc.stdout.strip()
+    return commit or "unknown"
 
 
 def _sha256(data: bytes) -> str:

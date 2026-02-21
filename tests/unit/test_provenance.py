@@ -74,6 +74,9 @@ def test_materialize_scaffold_writes_expected_tree(tmp_path: Path) -> None:
     manifest = json.loads(manifest_path.read_text())
     assert manifest["cmdstan"]["chains"] == 10
     assert manifest["cmdstan"]["iter_sampling"] == 10_000
+    assert manifest["generator"]["name"] == "mcmc-ref"
+    assert isinstance(manifest["generator"]["version"], str)
+    assert isinstance(manifest["generator"]["source_commit"], str)
     assert "stan_models/dugongs.stan" in manifest["files"]
     assert "stan_models/blr_informed.stan" in manifest["files"]
     assert "stan_models/neals_funnel-noncentered.stan" in manifest["files"]

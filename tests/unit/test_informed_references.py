@@ -4,7 +4,10 @@ import json
 import zipfile
 from pathlib import Path
 
+from click.testing import CliRunner
+
 from mcmc_ref.informed_references import import_informed_references
+from mcmc_ref.informed_references import main as informed_main
 
 
 def _write_posteriordb_json_zip(path: Path, chains: int = 4, draws: int = 4) -> None:
@@ -56,3 +59,17 @@ def test_import_informed_references_handles_missing_info_file(tmp_path: Path) ->
     meta = json.loads(meta_path.read_text())
     assert meta["reference_variant"] == "informed_prior"
     assert "informed_reference_info" not in meta
+
+
+def test_informed_references_cli_defaults_do_not_reference_jaxstan() -> None:
+    source_option = next(option for option in informed_main.params if option.name == "source_dir")
+    default_value = str(source_option.default)
+    assert "/tmp/jaxstan" not in default_value
+
+
+def test_informed_references_cli_is_marked_deprecated() -> None:
+    runner = CliRunner()
+    result = runner.invoke(informed_main, ["--help"])
+
+    assert result.exit_code == 0
+    assert "DEPRECATED" in result.output

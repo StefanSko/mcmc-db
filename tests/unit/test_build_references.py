@@ -4,7 +4,10 @@ import json
 import zipfile
 from pathlib import Path
 
+from click.testing import CliRunner
+
 from mcmc_ref.build_references import build_references
+from mcmc_ref.build_references import main as build_main
 
 
 def _write_reference_json_zip(path: Path, chains: int = 4, draws: int = 4) -> None:
@@ -142,3 +145,11 @@ def test_extract_stan_assets_reports_missing(tmp_path: Path) -> None:
 
     assert result.extracted == 0
     assert len(result.failures) == 1
+
+
+def test_build_references_cli_is_marked_deprecated() -> None:
+    runner = CliRunner()
+    result = runner.invoke(build_main, ["--help"])
+
+    assert result.exit_code == 0
+    assert "DEPRECATED" in result.output

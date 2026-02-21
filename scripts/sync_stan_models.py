@@ -32,7 +32,7 @@ import click
 @click.option(
     "--informed-stan-dir",
     type=click.Path(path_type=Path),
-    default=Path("/tmp/jaxstanv3/tests/posteriordb/informed_references/stan_models"),
+    default=Path("generated_references/informed/stan_models"),
     show_default=True,
     help="Directory containing *_informed.stan files.",
 )
@@ -44,6 +44,12 @@ def main(
     informed_stan_dir: Path,
     overwrite: bool,
 ) -> None:
+    click.echo(
+        "DEPRECATED: sync-stan-models is a legacy bootstrap utility; "
+        "use provenance-scaffold as the canonical source.",
+        err=True,
+    )
+
     root = Path(__file__).resolve().parents[1]
     src = root / "src"
     if str(src) not in sys.path:

@@ -78,11 +78,11 @@ def _annotate_meta(model: str, source_dir: Path, meta_dir: Path) -> None:
     meta_path.write_text(json.dumps(meta, indent=2, sort_keys=True))
 
 
-@click.command("import-informed-references")
+@click.command("import-informed-references", deprecated=True)
 @click.option(
     "--source-dir",
     type=click.Path(path_type=Path),
-    default=Path("/tmp/jaxstanv3/tests/posteriordb/informed_references/draws"),
+    default=Path.home() / ".mcmc-ref" / "legacy" / "informed_archives",
     show_default=True,
     help="Directory containing *_informed.json.zip and optional *.info.json files.",
 )
@@ -99,7 +99,7 @@ def _annotate_meta(model: str, source_dir: Path, meta_dir: Path) -> None:
     help="Allow conversion when quality checks fail.",
 )
 def main(source_dir: Path, output_root: Path, force: bool) -> None:
-    """Import informed-prior reference draws into a local mcmc-ref corpus."""
+    """DEPRECATED: Import informed draws; generate informed references via provenance pipeline."""
     if not source_dir.exists():
         raise SystemExit(f"source directory not found: {source_dir}")
     result = import_informed_references(source_dir=source_dir, output_root=output_root, force=force)
