@@ -1,6 +1,6 @@
 """mcmc-ref package."""
 
-from . import diagnostics, reference
+from . import diagnostics, generate, provenance, reference
 from .draws import Draws
 
-__all__ = ["Draws", "diagnostics", "reference"]
+__all__ = ["Draws", "diagnostics", "generate", "provenance", "reference"]

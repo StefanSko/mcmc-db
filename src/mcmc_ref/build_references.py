@@ -1,4 +1,4 @@
-"""Build a local reference corpus from posteriordb json.zip draw files."""
+"""Build a local reference corpus from mcmc-db JSON-zip draw archives."""
 
 from __future__ import annotations
 
@@ -10,9 +10,7 @@ import click
 
 from . import convert
 
-DEFAULT_POSTERIORDB_DRAWS = (
-    Path.home() / ".posteriordb" / "posterior_database" / "reference_posteriors" / "draws" / "draws"
-)
+DEFAULT_REFERENCE_ARCHIVES = Path.home() / ".mcmc-db" / "reference_archives"
 
 
 @dataclass(frozen=True)
@@ -77,9 +75,9 @@ def build_references(
 @click.option(
     "--source-dir",
     type=click.Path(path_type=Path),
-    default=DEFAULT_POSTERIORDB_DRAWS,
+    default=DEFAULT_REFERENCE_ARCHIVES,
     show_default=True,
-    help="Directory containing posteriordb *.json.zip draw files.",
+    help="Directory containing mcmc-db reference draw archives (*.json.zip).",
 )
 @click.option(
     "--output-root",
@@ -99,7 +97,7 @@ def build_references(
     help="Allow conversion when quality checks fail (not recommended for canonical benchmarks).",
 )
 def main(source_dir: Path, output_root: Path, models: str | None, force: bool) -> None:
-    """Convert all posteriordb draw archives to a local mcmc-ref corpus."""
+    """Convert all mcmc-db draw archives to a local mcmc-ref corpus."""
     if not source_dir.exists():
         raise SystemExit(f"source directory not found: {source_dir}")
     model_list = models.split(",") if models else None

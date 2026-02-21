@@ -57,7 +57,7 @@ ess = diagnostics.ess_bulk(chains)
 
 When generating reference draws, follow Stan's prior-choice recommendations:
 avoid flat/super-vague priors, prefer weakly informative priors on a sensible
-scale, and re-draw posteriordb models that use extremely flat priors so the
+scale, and re-draw models that use extremely flat priors so the
 reference is stable and diagnostic-friendly.
 
 Diagnostics use rank-normalized split R-hat and bulk/tail ESS with stdlib-only
@@ -74,7 +74,7 @@ setting `MCMC_REF_GENERATE=1` and (optionally) `MCMC_REF_GENERATE_MODEL=...`.
 Use this when you want a pre-built corpus other libraries can validate against.
 
 ```bash
-# default source: ~/.posteriordb/posterior_database/reference_posteriors/draws/draws
+# default source: ~/.mcmc-db/reference_archives
 # default output: ~/.mcmc-ref/{draws,meta}
 uv run --extra dev python scripts/build_references.py
 ```
@@ -92,12 +92,47 @@ uv run --extra dev python scripts/build_references.py \
 
 # override source and output paths
 uv run --extra dev python scripts/build_references.py \
-  --source-dir ~/.posteriordb/posterior_database/reference_posteriors/draws/draws \
+  --source-dir ~/.mcmc-db/reference_archives \
   --output-root /path/to/reference-corpus
 ```
 
 If you install `mcmc-ref` as a package, the equivalent command is
 `mcmc-ref-build-references`.
+
+## Recreate Provenance Assets
+
+Generate deterministic Stan source/data scaffolding and geometry-pair definitions
+directly from versioned recipes in this repo (no copied reference artifacts):
+
+```bash
+mcmc-ref provenance-scaffold --output-root /tmp/mcmc-db/provenance
+# or
+uv run --extra dev python scripts/materialize_provenance.py --output-root /tmp/mcmc-db/provenance
+```
+
+This writes:
+- `stan_models/*.stan` and `stan_data/*.json` for all curated models (core, informed, geometry refs)
+- `pairs/<name>/{pair.json,centered/*,noncentered/*}` for geometry benchmarks
+- `provenance_manifest.json` with SHA256 hashes + CmdStan settings
+
+Generate fresh reference archives/draws from those recipes:
+
+```bash
+# requires cmdstanpy + CmdStan
+uv add --dev --optional provenance cmdstanpy
+mcmc-ref provenance-generate \
+  --scaffold-root /tmp/mcmc-db/provenance \
+  --output-root /tmp/mcmc-db/generated
+```
+
+Publish generated references into the package data tree used by downstream consumers:
+
+```bash
+mcmc-ref provenance-publish \
+  --source-root /tmp/mcmc-db/generated \
+  --scaffold-root /tmp/mcmc-db/provenance \
+  --package-root src/mcmc_ref/data
+```
 
 ## Validate From Another Library
 

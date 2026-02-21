@@ -11,7 +11,8 @@ import pyarrow.csv as pacsv
 import pyarrow.parquet as pq
 
 from . import convert as convert_mod
-from . import reference
+from . import generate as generate_mod
+from . import provenance, reference
 from .store import DataStore
 
 
@@ -185,6 +186,59 @@ def convert_cmd(input_path: Path, name: str, force: bool) -> None:
         input_path, name=name, out_draws_dir=draws_dir, out_meta_dir=meta_dir, force=force
     )
     click.echo(f"converted {name} -> {draws_dir}")
+
+
+@main.command("provenance-scaffold")
+@click.option("--output-root", type=click.Path(path_type=Path), required=True)
+def provenance_scaffold_cmd(output_root: Path) -> None:
+    manifest_path = provenance.materialize_scaffold(output_root)
+    click.echo(f"wrote {manifest_path}")
+
+
+@main.command("provenance-generate")
+@click.option("--scaffold-root", type=click.Path(path_type=Path), required=True)
+@click.option("--output-root", type=click.Path(path_type=Path), required=True)
+@click.option("--models", default=None, help="Optional comma-separated recipe names.")
+@click.option("--force", is_flag=True, help="Forward --force to convert quality checks.")
+@click.option("--fake-runner", is_flag=True, help="Use deterministic fake runner (testing only).")
+def provenance_generate_cmd(
+    scaffold_root: Path,
+    output_root: Path,
+    models: str | None,
+    force: bool,
+    fake_runner: bool,
+) -> None:
+    model_list = models.split(",") if models else None
+    runner = generate_mod.fake_jsonzip_runner if fake_runner else None
+    result = generate_mod.generate_reference_corpus(
+        scaffold_root=scaffold_root,
+        output_root=output_root,
+        models=model_list,
+        force=force,
+        runner=runner,
+    )
+    click.echo(f"generated={result.generated} failed={result.failed} output={result.output_root}")
+    if result.errors:
+        for name, message in sorted(result.errors.items()):
+            click.echo(f"- {name}: {message}")
+        raise SystemExit(1)
+
+
+@main.command("provenance-publish")
+@click.option("--source-root", type=click.Path(path_type=Path), required=True)
+@click.option("--scaffold-root", type=click.Path(path_type=Path), required=True)
+@click.option("--package-root", type=click.Path(path_type=Path), required=True)
+def provenance_publish_cmd(source_root: Path, scaffold_root: Path, package_root: Path) -> None:
+    result = generate_mod.publish_reference_data(
+        source_root=source_root,
+        scaffold_root=scaffold_root,
+        package_root=package_root,
+    )
+    click.echo(
+        "published "
+        f"draws={result.draws_copied} meta={result.meta_copied} pairs={result.pairs_copied} "
+        f"to={result.package_root}"
+    )
 
 
 def _read_actual_csv(path: Path) -> dict[str, list[float]]:

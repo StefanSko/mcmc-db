@@ -7,7 +7,7 @@ from pathlib import Path
 from mcmc_ref.build_references import build_references
 
 
-def _write_posteriordb_json_zip(path: Path, chains: int = 4, draws: int = 4) -> None:
+def _write_reference_json_zip(path: Path, chains: int = 4, draws: int = 4) -> None:
     payload: list[dict[str, list[float]]] = []
     for chain_idx in range(chains):
         mu = [1.0 + chain_idx * 0.01 + draw_idx * 0.1 for draw_idx in range(draws)]
@@ -22,8 +22,8 @@ def test_build_references_converts_all_models(tmp_path: Path) -> None:
     source_dir = tmp_path / "source"
     output_root = tmp_path / "out"
     source_dir.mkdir()
-    _write_posteriordb_json_zip(source_dir / "model_a-model_a.json.zip")
-    _write_posteriordb_json_zip(source_dir / "model_b-model_b.json.zip")
+    _write_reference_json_zip(source_dir / "model_a-model_a.json.zip")
+    _write_reference_json_zip(source_dir / "model_b-model_b.json.zip")
 
     result = build_references(source_dir=source_dir, output_root=output_root, force=True)
 
@@ -38,8 +38,8 @@ def test_build_references_filters_models(tmp_path: Path) -> None:
     source_dir = tmp_path / "source"
     output_root = tmp_path / "out"
     source_dir.mkdir()
-    _write_posteriordb_json_zip(source_dir / "model_a-model_a.json.zip")
-    _write_posteriordb_json_zip(source_dir / "model_b-model_b.json.zip")
+    _write_reference_json_zip(source_dir / "model_a-model_a.json.zip")
+    _write_reference_json_zip(source_dir / "model_b-model_b.json.zip")
 
     result = build_references(
         source_dir=source_dir,
@@ -59,7 +59,7 @@ def test_build_references_reports_strict_check_failures(tmp_path: Path) -> None:
     source_dir = tmp_path / "source"
     output_root = tmp_path / "out"
     source_dir.mkdir()
-    _write_posteriordb_json_zip(source_dir / "model_a-model_a.json.zip", chains=1)
+    _write_reference_json_zip(source_dir / "model_a-model_a.json.zip", chains=1)
 
     result = build_references(source_dir=source_dir, output_root=output_root)
 
