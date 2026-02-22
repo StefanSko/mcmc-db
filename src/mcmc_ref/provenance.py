@@ -438,8 +438,7 @@ def _kidscore_momhs_recipe() -> ModelRecipe:
     n = 120
     mom_hs = [idx % 2 for idx in range(n)]
     kid_score = [
-        45.0 + 4.0 * float(flag) + 0.2 * float(idx % 11)
-        for idx, flag in enumerate(mom_hs)
+        45.0 + 4.0 * float(flag) + 0.2 * float(idx % 11) for idx, flag in enumerate(mom_hs)
     ]
     return ModelRecipe(
         name="kidscore_momhs",
@@ -695,13 +694,9 @@ model {
 def _blr_recipe() -> ModelRecipe:
     n = 120
     d = 5
-    x = [
-        [1.0 + 0.1 * float((row + col) % 7) for col in range(d)]
-        for row in range(n)
-    ]
+    x = [[1.0 + 0.1 * float((row + col) % 7) for col in range(d)] for row in range(n)]
     y = [
-        sum(0.2 * x[row][col] * float(col + 1) for col in range(d))
-        + 0.05 * float(row % 5)
+        sum(0.2 * x[row][col] * float(col + 1) for col in range(d)) + 0.05 * float(row % 5)
         for row in range(n)
     ]
     return ModelRecipe(
@@ -825,10 +820,7 @@ model {
 def _mesquite_logmesquite_recipe() -> ModelRecipe:
     n = 140
     k = 7
-    x = [
-        [0.8 + 0.05 * float((idx + col) % 13) for col in range(k)]
-        for idx in range(n)
-    ]
+    x = [[0.8 + 0.05 * float((idx + col) % 13) for col in range(k)] for idx in range(n)]
     y = [sum(0.1 * float(col + 1) * row[col] for col in range(k)) for row in x]
     return ModelRecipe(
         name="mesquite_logmesquite",
@@ -906,8 +898,7 @@ def _logearn_height_informed_recipe() -> ModelRecipe:
     n = 150
     height_std = [(-2.0 + 4.0 * float(idx) / float(n - 1)) for idx in range(n)]
     log_earn_std = [
-        0.2 + 0.4 * value + 0.05 * float(idx % 5)
-        for idx, value in enumerate(height_std)
+        0.2 + 0.4 * value + 0.05 * float(idx % 5) for idx, value in enumerate(height_std)
     ]
     return ModelRecipe(
         name="logearn_height_informed",
@@ -941,8 +932,7 @@ def _kidscore_momiq_informed_recipe() -> ModelRecipe:
     n = 120
     mom_iq_std = [(-2.0 + 4.0 * float(idx) / float(n - 1)) for idx in range(n)]
     kid_score_std = [
-        0.1 + 0.45 * value + 0.03 * float(idx % 6)
-        for idx, value in enumerate(mom_iq_std)
+        0.1 + 0.45 * value + 0.03 * float(idx % 6) for idx, value in enumerate(mom_iq_std)
     ]
     return ModelRecipe(
         name="kidscore_momiq_informed",
@@ -1007,8 +997,7 @@ def _mesquite_logvolume_informed_recipe() -> ModelRecipe:
     k = 2
     log_canopy_volume_std = [(-2.0 + 4.0 * float(idx) / float(n - 1)) for idx in range(n)]
     log_weight_std = [
-        0.1 + 0.6 * value + 0.04 * float(idx % 5)
-        for idx, value in enumerate(log_canopy_volume_std)
+        0.1 + 0.6 * value + 0.04 * float(idx % 5) for idx, value in enumerate(log_canopy_volume_std)
     ]
     return ModelRecipe(
         name="mesquite_logvolume_informed",
@@ -1326,7 +1315,7 @@ transformed parameters {
   }
 }
 model {
-  z_group ~ normal(0, 1);
+  to_vector(z_group) ~ normal(0, 1);
   sigma_group ~ normal(0, 1);
   mu ~ normal(0, 1);
   sigma ~ normal(0, 1);
@@ -1354,8 +1343,7 @@ def _pair_bangladesh_contraceptive() -> PairRecipe:
     urban = [idx % 2 for idx in range(n)]
     district = [(idx % n_districts) + 1 for idx in range(n)]
     use = [
-        1 if (0.4 + 0.1 * urban[idx] + 0.02 * (district[idx] - 1)) > 0.55 else 0
-        for idx in range(n)
+        1 if (0.4 + 0.1 * urban[idx] + 0.02 * (district[idx] - 1)) > 0.55 else 0 for idx in range(n)
     ]
     data = {
         "N": n,

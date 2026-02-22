@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 from mcmc_ref import pairs, reference
@@ -39,3 +40,36 @@ def test_package_data_contains_provenance_manifest_pairs_and_issue_models() -> N
     assert draws - meta == set()
     assert draws - stan_models == set()
     assert draws - stan_data == set()
+
+
+def test_stan_models_contains_only_stan_source_files() -> None:
+    """stan_models/ should only contain .stan source files, not compiled binaries."""
+    stan_models_dir = Path("packages/mcmc-ref-data/src/mcmc_ref_data/data/stan_models")
+    non_stan = [f.name for f in stan_models_dir.iterdir() if f.is_file() and f.suffix != ".stan"]
+    assert non_stan == [], f"Non-.stan files in stan_models/: {non_stan}"
+
+
+def test_every_pair_reference_model_has_draws_and_meta() -> None:
+    """Issue #14: every pair's reference_model must have packaged draws + meta."""
+    package_root = Path("packages/mcmc-ref-data/src/mcmc_ref_data/data")
+    pairs_dir = package_root / "pairs"
+    draws_dir = package_root / "draws"
+    meta_dir = package_root / "meta"
+
+    missing: list[str] = []
+    for pair_dir in sorted(pairs_dir.iterdir()):
+        pair_json = pair_dir / "pair.json"
+        if not pair_json.exists():
+            continue
+        pair_meta = json.loads(pair_json.read_text())
+        ref_model = pair_meta["reference_model"]
+
+        draws_path = draws_dir / f"{ref_model}.draws.parquet"
+        meta_path = meta_dir / f"{ref_model}.meta.json"
+
+        if not draws_path.exists():
+            missing.append(f"{pair_dir.name}: missing draws/{ref_model}.draws.parquet")
+        if not meta_path.exists():
+            missing.append(f"{pair_dir.name}: missing meta/{ref_model}.meta.json")
+
+    assert missing == [], "Pair reference artifacts missing:\n" + "\n".join(missing)
