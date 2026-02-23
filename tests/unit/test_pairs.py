@@ -241,11 +241,18 @@ def test_bundled_pairs_discoverable() -> None:
 
 
 def test_bundled_pair_has_reference_draws() -> None:
-    """Bundled pairs should expose usable reference draws and stats."""
+    """Bundled pairs should expose usable reference draws and stats.
+
+    Uses packaged-only store to ensure we test actual package contents,
+    not locally-generated draws that might mask missing artifacts.
+    """
     from mcmc_ref.pairs import list_pairs, pair
 
-    for name in list_pairs():
-        p = pair(name)
+    package_root = Path("packages/mcmc-ref-data/src/mcmc_ref_data/data")
+    store = DataStore(local_root=None, packaged_root=package_root)
+
+    for name in list_pairs(store=store):
+        p = pair(name, store=store)
         draws = p.reference_draws
         stats = p.reference_stats
         assert draws is not None
@@ -254,9 +261,10 @@ def test_bundled_pair_has_reference_draws() -> None:
 
 def test_bundled_pair_reference_meta_is_cmdstan_generated() -> None:
     from mcmc_ref.pairs import list_pairs, pair
-    from mcmc_ref.store import DataStore
 
-    store = DataStore()
+    package_root = Path("packages/mcmc-ref-data/src/mcmc_ref_data/data")
+    store = DataStore(local_root=None, packaged_root=package_root)
+
     for name in list_pairs(store=store):
         p = pair(name, store=store)
         meta = store.read_meta(p.reference_model)

@@ -29,6 +29,7 @@ def convert_file(
     out_draws_dir: Path,
     out_meta_dir: Path,
     force: bool = False,
+    source: str = "converted",
 ) -> ConvertResult:
     input_path = Path(input_path)
     out_draws_dir = Path(out_draws_dir)
@@ -54,7 +55,7 @@ def convert_file(
         "diagnostics": diag,
         "generated_date": date.today().isoformat(),
         "checks": checks,
-        "source": "converted",
+        "source": source,
     }
 
     draws_path = out_draws_dir / f"{name}.draws.parquet"

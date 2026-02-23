@@ -39,7 +39,7 @@ class NumpyBackend:
                 data = np.asarray(table[param])
             entry = {
                 "mean": float(np.mean(data)),
-                "std": float(np.std(data, ddof=1)),
+                "std": float(np.std(data, ddof=0)),
             }
             q_vals = np.quantile(data, qs)
             for q, v in zip(qs, q_vals, strict=False):

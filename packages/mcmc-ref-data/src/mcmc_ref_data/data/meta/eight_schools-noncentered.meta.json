@@ -1,0 +1,125 @@
+{
+  "checks": {
+    "ess_above_400": true,
+    "nchains_is_gte_4": true,
+    "ndraws_is_10k": true,
+    "rhat_below_1_01": true
+  },
+  "diagnostics": {
+    "mu": {
+      "ess_bulk": 9757.608750298632,
+      "ess_tail": 9861.504330826514,
+      "rhat": 1.0003086537032304
+    },
+    "tau": {
+      "ess_bulk": 9970.765151220727,
+      "ess_tail": 10000.0,
+      "rhat": 1.0004454173372623
+    },
+    "theta[1]": {
+      "ess_bulk": 9980.992797357372,
+      "ess_tail": 9656.234662407876,
+      "rhat": 0.9995190985705404
+    },
+    "theta[2]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9823.177117473502,
+      "rhat": 1.0004483390331405
+    },
+    "theta[3]": {
+      "ess_bulk": 9764.396434087737,
+      "ess_tail": 9945.314361394901,
+      "rhat": 1.0002948733552033
+    },
+    "theta[4]": {
+      "ess_bulk": 9476.401277832287,
+      "ess_tail": 9667.540390669576,
+      "rhat": 1.0002388435007528
+    },
+    "theta[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9828.81259192928,
+      "rhat": 1.000041084753906
+    },
+    "theta[6]": {
+      "ess_bulk": 9991.308394873216,
+      "ess_tail": 9864.45711894152,
+      "rhat": 1.000238136178151
+    },
+    "theta[7]": {
+      "ess_bulk": 9737.339737891987,
+      "ess_tail": 9382.277678145754,
+      "rhat": 0.99976619492626
+    },
+    "theta[8]": {
+      "ess_bulk": 9677.24719211942,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000847010406313
+    },
+    "theta_raw[1]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9914.639685849581,
+      "rhat": 1.0001397304116533
+    },
+    "theta_raw[2]": {
+      "ess_bulk": 9924.714769934862,
+      "ess_tail": 10000.0,
+      "rhat": 0.9999918617124769
+    },
+    "theta_raw[3]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9684.053346430394,
+      "rhat": 1.0004614815193071
+    },
+    "theta_raw[4]": {
+      "ess_bulk": 9419.464766658048,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000761971213705
+    },
+    "theta_raw[5]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 10000.0,
+      "rhat": 1.0000711653259409
+    },
+    "theta_raw[6]": {
+      "ess_bulk": 10000.0,
+      "ess_tail": 9601.58925785319,
+      "rhat": 0.9999976186989656
+    },
+    "theta_raw[7]": {
+      "ess_bulk": 9598.239827975347,
+      "ess_tail": 10000.0,
+      "rhat": 1.0009551603863045
+    },
+    "theta_raw[8]": {
+      "ess_bulk": 9494.485234377253,
+      "ess_tail": 10000.0,
+      "rhat": 1.0007230655816672
+    }
+  },
+  "generated_date": "2026-02-22",
+  "model": "eight_schools-noncentered",
+  "n_chains": 10,
+  "n_draws_per_chain": 1000,
+  "parameters": [
+    "mu",
+    "tau",
+    "theta[1]",
+    "theta[2]",
+    "theta[3]",
+    "theta[4]",
+    "theta[5]",
+    "theta[6]",
+    "theta[7]",
+    "theta[8]",
+    "theta_raw[1]",
+    "theta_raw[2]",
+    "theta_raw[3]",
+    "theta_raw[4]",
+    "theta_raw[5]",
+    "theta_raw[6]",
+    "theta_raw[7]",
+    "theta_raw[8]"
+  ],
+  "source": "cmdstan-2.37.0"
+}

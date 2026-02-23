@@ -88,6 +88,7 @@ def generate_reference_corpus(
                 out_draws_dir=draws_dir,
                 out_meta_dir=meta_dir,
                 force=force,
+                source=_cmdstan_source(),
             )
             generated += 1
         except Exception as exc:  # noqa: BLE001
@@ -257,6 +258,16 @@ def _copy_files(source_dir: Path, target_dir: Path, pattern: str) -> int:
         shutil.copy2(path, target_dir / path.name)
         copied += 1
     return copied
+
+
+def _cmdstan_source() -> str:
+    try:
+        import cmdstanpy
+
+        ver = cmdstanpy.cmdstan_version()
+        return f"cmdstan-{ver[0]}.{ver[1]}" + (f".{ver[2]}" if len(ver) > 2 else ".0")
+    except Exception:  # noqa: BLE001
+        return "cmdstan-unknown"
 
 
 def _reset_dir(path: Path) -> None:
