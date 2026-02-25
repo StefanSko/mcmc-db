@@ -21,7 +21,7 @@ bootstrap = ["posteriordb>=0.2.0"]
 mcmc-ref = "mcmc_ref.cli:main"
 
 [tool.uv.sources]
-mcmc-ref-data = { path = "packages/mcmc-ref-data" }
+mcmc-ref-data = { workspace = true }
 
 [tool.ruff]
 line-length = 100
