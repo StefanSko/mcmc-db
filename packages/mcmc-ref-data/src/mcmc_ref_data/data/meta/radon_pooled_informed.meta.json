@@ -8,24 +8,24 @@
   "diagnostics": {
     "alpha": {
       "ess_bulk": 10000.0,
-      "ess_tail": 10000.0,
-      "rhat": 1.0001994512615657
+      "ess_tail": 5936.121840181031,
+      "rhat": 1.0016701435399564
     },
     "beta": {
       "ess_bulk": 10000.0,
-      "ess_tail": 9690.554795233702,
-      "rhat": 1.0005314145328406
+      "ess_tail": 5293.777708299974,
+      "rhat": 1.000497161759289
     },
     "sigma_y": {
-      "ess_bulk": 10000.0,
-      "ess_tail": 10000.0,
-      "rhat": 1.0006351618813383
+      "ess_bulk": 4779.2637476321825,
+      "ess_tail": 5452.080503891982,
+      "rhat": 1.0025037491609299
     }
   },
-  "generated_date": "2026-02-09",
+  "generated_date": "2026-02-26",
   "informed_reference_info": {
-    "added_by": "jaxstan informed-prior reference generator",
-    "added_date": "2026-01-08",
+    "added_by": "mcmc-db cmdstan regeneration",
+    "added_date": "2026-02-26",
     "checks_made": {
       "ess_above_400": true,
       "nchains_is_gte_4": true,
@@ -33,8 +33,8 @@
       "rhat_below_1_01": true
     },
     "diagnostics": {
-      "max_rhat": 1.00063,
-      "min_ess": 9842.88,
+      "max_rhat": 1.0025,
+      "min_ess": 4779.26,
       "nchains": 10,
       "ndraws": 10000
     },
@@ -42,21 +42,21 @@
       "method": "stan_sampling",
       "method_arguments": {
         "chains": 10,
-        "iter": 20000,
+        "iter": 2000,
         "seed": 4711,
-        "thin": 10,
-        "warmup": 10000
+        "thin": 1,
+        "warmup": 1000
       }
     },
     "name": "radon_pooled_informed",
     "standardization": {
       "floor_measure": {
-        "mean": 0.525411596277738,
-        "std": 1.3741408310437682
+        "mean": 0.4999602322436968,
+        "std": 0.49999999841852555
       },
       "log_radon": {
-        "mean": 0.881331096262018,
-        "std": 1.0790111777216773
+        "mean": 1.0397080057644703,
+        "std": 0.1444895336166069
       }
     },
     "versions": {

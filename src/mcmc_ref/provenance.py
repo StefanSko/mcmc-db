@@ -267,6 +267,16 @@ def _radon_pooled_data() -> dict[str, Any]:
     }
 
 
+def _zscore_population(values: list[float]) -> list[float]:
+    n = len(values)
+    mean = sum(values) / float(n)
+    variance = sum((value - mean) ** 2 for value in values) / float(n)
+    std = math.sqrt(variance)
+    if std == 0.0:
+        raise ValueError("Cannot standardize constant vector")
+    return [(value - mean) / std for value in values]
+
+
 def _radon_pooled_recipe() -> ModelRecipe:
     return ModelRecipe(
         name="radon_pooled",
@@ -299,38 +309,38 @@ model {
 
 
 def _radon_pooled_informed_recipe() -> ModelRecipe:
+    raw = _radon_pooled_data()
+    floor_measure_std = _zscore_population([float(v) for v in raw["floor_measure"]])
+    log_radon_std = _zscore_population([float(v) for v in raw["log_radon"]])
     return ModelRecipe(
         name="radon_pooled_informed",
         description="Informed-prior pooled radon regression.",
         stan_code="""
 data {
-  int<lower=1> N;
-  int<lower=1> N_county;
-  array[N] int<lower=1, upper=N_county> county;
-  array[N] int<lower=0, upper=1> floor_measure;
-  array[N] real log_radon;
-}
-transformed data {
-  vector[N] y = to_vector(log_radon);
-  real y_mean = mean(y);
-  real y_sd = sd(y);
-  vector[N] y_std = (y - y_mean) / y_sd;
+  int<lower=0> N;
+  vector[N] floor_measure_std;
+  vector[N] log_radon_std;
 }
 parameters {
-  real beta_0;
-  real beta_1;
-  real<lower=0> sigma;
+  real alpha;
+  real beta;
+  real<lower=0> sigma_y;
 }
 model {
-  beta_0 ~ normal(0, 0.5);
-  beta_1 ~ normal(0, 0.5);
-  sigma ~ lognormal(-1, 0.4);
-  for (n in 1:N) {
-    y_std[n] ~ normal(beta_0 + beta_1 * floor_measure[n], sigma);
-  }
+  // Weakly informative priors (after standardization)
+  alpha ~ normal(0, 2.5);
+  beta ~ normal(0, 2.5);
+  sigma_y ~ normal(0, 1);  // half-normal via constraint
+
+  // Likelihood
+  log_radon_std ~ normal(alpha + beta * floor_measure_std, sigma_y);
 }
 """,
-        stan_data=_radon_pooled_data(),
+        stan_data={
+            "N": int(raw["N"]),
+            "floor_measure_std": floor_measure_std,
+            "log_radon_std": log_radon_std,
+        },
         tags=("informed", "issue-12"),
     )
 
