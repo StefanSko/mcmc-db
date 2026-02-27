@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import importlib
 import json
 import shutil
@@ -122,9 +123,9 @@ def publish_reference_data(
     if not scaffold_pairs.is_dir():
         raise FileNotFoundError(f"scaffold pairs directory not found: {scaffold_pairs}")
 
-    manifest = scaffold_root / "provenance_manifest.json"
-    if not manifest.is_file():
-        raise FileNotFoundError(f"scaffold provenance manifest not found: {manifest}")
+    scaffold_manifest_path = scaffold_root / "provenance_manifest.json"
+    if not scaffold_manifest_path.is_file():
+        raise FileNotFoundError(f"scaffold provenance manifest not found: {scaffold_manifest_path}")
 
     draws_target = package_root / "draws"
     meta_target = package_root / "meta"
@@ -144,7 +145,14 @@ def publish_reference_data(
         shutil.copytree(pair_dir, pairs_target / pair_dir.name, dirs_exist_ok=True)
         pairs_copied += 1
 
-    shutil.copy2(manifest, package_root / "provenance_manifest.json")
+    scaffold_manifest = json.loads(scaffold_manifest_path.read_text())
+    package_manifest = {
+        **scaffold_manifest,
+        "files": _package_file_hashes(package_root),
+    }
+    (package_root / "provenance_manifest.json").write_text(
+        json.dumps(package_manifest, indent=2, sort_keys=True) + "\n"
+    )
 
     return PublishResult(
         draws_copied=draws_copied,
@@ -152,6 +160,18 @@ def publish_reference_data(
         pairs_copied=pairs_copied,
         package_root=package_root,
     )
+
+
+def _package_file_hashes(package_root: Path) -> dict[str, str]:
+    files: dict[str, str] = {}
+    for path in sorted(package_root.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(package_root).as_posix()
+        if rel == "provenance_manifest.json":
+            continue
+        files[rel] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return files
 
 
 def fake_jsonzip_runner(

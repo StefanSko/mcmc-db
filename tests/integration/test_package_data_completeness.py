@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 
@@ -73,3 +74,24 @@ def test_every_pair_reference_model_has_draws_and_meta() -> None:
             missing.append(f"{pair_dir.name}: missing meta/{ref_model}.meta.json")
 
     assert missing == [], "Pair reference artifacts missing:\n" + "\n".join(missing)
+
+
+def test_provenance_manifest_hashes_match_packaged_files() -> None:
+    package_root = Path("packages/mcmc-ref-data/src/mcmc_ref_data/data")
+    manifest_path = package_root / "provenance_manifest.json"
+    manifest = json.loads(manifest_path.read_text())
+
+    expected_files = manifest.get("files")
+    assert isinstance(expected_files, dict)
+    assert expected_files
+
+    actual_files: dict[str, str] = {}
+    for path in sorted(package_root.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(package_root).as_posix()
+        if rel == "provenance_manifest.json":
+            continue
+        actual_files[rel] = hashlib.sha256(path.read_bytes()).hexdigest()
+
+    assert expected_files == actual_files

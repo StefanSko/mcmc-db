@@ -47,10 +47,10 @@ assert result.passed, result.failures
 
 `DataStore` resolves in this order:
 
-1. `MCMC_REF_LOCAL_ROOT` (optional local override)
-2. installed package data (`mcmc-ref-data`, fallback `mcmc-ref`)
+1. installed package data (`mcmc-ref-data`, fallback `mcmc-ref`)
+2. `MCMC_REF_LOCAL_ROOT` (fallback only)
 
-Use `MCMC_REF_LOCAL_ROOT` only for local experimentation.
+`MCMC_REF_LOCAL_ROOT` is intended for local experimentation when package data is absent.
 
 ## Maintainer Provenance Pipeline (canonical)
 

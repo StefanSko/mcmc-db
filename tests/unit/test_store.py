@@ -120,3 +120,27 @@ def test_datastore_resolves_stan_code_from_stan_models(tmp_path: Path) -> None:
     store = DataStore(local_root=tmp_path, packaged_root=None)
 
     assert store.read_stan_code("example") == "parameters { real mu; }"
+
+
+def test_datastore_prefers_packaged_assets_by_default(tmp_path: Path) -> None:
+    local_root = tmp_path / "local"
+    packaged_root = tmp_path / "packaged"
+    (local_root / "meta").mkdir(parents=True)
+    (packaged_root / "meta").mkdir(parents=True)
+    (local_root / "meta" / "example.meta.json").write_text('{"source": "local"}')
+    (packaged_root / "meta" / "example.meta.json").write_text('{"source": "packaged"}')
+
+    store = DataStore(local_root=local_root, packaged_root=packaged_root)
+
+    assert store.read_meta("example")["source"] == "packaged"
+
+
+def test_datastore_falls_back_to_local_assets_when_packaged_missing(tmp_path: Path) -> None:
+    local_root = tmp_path / "local"
+    packaged_root = tmp_path / "packaged"
+    (local_root / "meta").mkdir(parents=True)
+    (local_root / "meta" / "example.meta.json").write_text('{"source": "local"}')
+
+    store = DataStore(local_root=local_root, packaged_root=packaged_root)
+
+    assert store.read_meta("example")["source"] == "local"

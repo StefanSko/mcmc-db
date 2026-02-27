@@ -19,7 +19,11 @@ class StorePaths:
 
 
 class DataStore:
-    def __init__(self, local_root: Path | None = None, packaged_root: Path | None = None) -> None:
+    def __init__(
+        self,
+        local_root: Path | None = None,
+        packaged_root: Path | None = None,
+    ) -> None:
         self._local = self._init_root(local_root or _default_local_root())
         self._packaged = self._init_root(packaged_root or _default_packaged_root())
 
@@ -33,21 +37,17 @@ class DataStore:
         return sorted(names)
 
     def resolve_draws_path(self, model: str) -> Path:
-        local = self._resolve_in_root(self._local, model, "draws", ".draws.parquet")
-        if local is not None:
-            return local
-        packaged = self._resolve_in_root(self._packaged, model, "draws", ".draws.parquet")
-        if packaged is not None:
-            return packaged
+        for root in self._resolution_roots():
+            path = self._resolve_in_root(root, model, "draws", ".draws.parquet")
+            if path is not None:
+                return path
         raise FileNotFoundError(f"draws not found for model: {model}")
 
     def resolve_meta_path(self, model: str) -> Path:
-        local = self._resolve_in_root(self._local, model, "meta", ".meta.json")
-        if local is not None:
-            return local
-        packaged = self._resolve_in_root(self._packaged, model, "meta", ".meta.json")
-        if packaged is not None:
-            return packaged
+        for root in self._resolution_roots():
+            path = self._resolve_in_root(root, model, "meta", ".meta.json")
+            if path is not None:
+                return path
         raise FileNotFoundError(f"metadata not found for model: {model}")
 
     def read_meta(self, model: str) -> dict:
@@ -55,12 +55,10 @@ class DataStore:
         return json.loads(path.read_text())
 
     def resolve_stan_data_path(self, model: str) -> Path:
-        local = self._resolve_in_root(self._local, model, "stan_data", ".data.json")
-        if local is not None:
-            return local
-        packaged = self._resolve_in_root(self._packaged, model, "stan_data", ".data.json")
-        if packaged is not None:
-            return packaged
+        for root in self._resolution_roots():
+            path = self._resolve_in_root(root, model, "stan_data", ".data.json")
+            if path is not None:
+                return path
         raise FileNotFoundError(f"stan data not found for model: {model}")
 
     def read_stan_data(self, model: str) -> dict:
@@ -68,12 +66,10 @@ class DataStore:
         return json.loads(path.read_text())
 
     def resolve_stan_code_path(self, model: str) -> Path:
-        local = self._resolve_stan_code_in_root(self._local, model)
-        if local is not None:
-            return local
-        packaged = self._resolve_stan_code_in_root(self._packaged, model)
-        if packaged is not None:
-            return packaged
+        for root in self._resolution_roots():
+            path = self._resolve_stan_code_in_root(root, model)
+            if path is not None:
+                return path
         raise FileNotFoundError(f"stan code not found for model: {model}")
 
     def read_stan_code(self, model: str) -> str:
@@ -121,6 +117,9 @@ class DataStore:
         if stan_models.exists():
             return stan_models
         return None
+
+    def _resolution_roots(self) -> tuple[StorePaths | None, StorePaths | None]:
+        return (self._packaged, self._local)
 
     def _init_root(self, root: Path | None) -> StorePaths | None:
         if root is None:
